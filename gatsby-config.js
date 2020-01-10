@@ -1,8 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: 'Maria Machine',
+    author: 'Roman Ponomarev',
+    description: '',
+    siteUrl: 'https://mariamachine.io',
+    social: {
+      twitter: 'mariamachine_ml',
+      facebook: 'maria.machine.ml',
+      vk: 'maria_machine',
+      telegram: 'maria_machine'
+    }
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
