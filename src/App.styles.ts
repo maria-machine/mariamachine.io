@@ -53,4 +53,17 @@ export const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
+
+    .no-scroll {
+        overflow: hidden;
+    }
+
+    a {
+        text-decoration: none;
+        transition: opacity 0.1s;
+    }
+
+    a:hover {
+        opacity: 0.85;
+    }
 `;

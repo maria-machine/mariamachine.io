@@ -27,6 +27,7 @@ module.exports = {
         'react/prop-types': 'off',
         '@typescript-eslint/interface-name-prefix': [2, { "prefixWithI": "always" }],
         '@typescript-eslint/explicit-function-return-type': 0,
+        '@typescript-eslint/no-explicit-any': 2,
         'semi': 2
-    },
+    }
 };
