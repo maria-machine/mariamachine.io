@@ -2,7 +2,9 @@ import { ISetLangLocale } from '../../actionCreators';
 
 import { IStateLang } from '../../interfaces/state-lang.interface';
 
-const initialState = {locale: 'en'};
+import { LocaleEnum } from '../../enums/locale.enum';
+
+const initialState = {locale: LocaleEnum.EN};
 
 export type LangActionsType = ISetLangLocale;
 

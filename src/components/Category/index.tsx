@@ -7,14 +7,18 @@ import { contentful } from '../../utils/contentful';
 
 import { colors } from '../../variables';
 
+import { messages } from '../../translations';
+
 import { IPost } from '../../interfaces/post.interface';
+
+import { PostCategoriesEnum } from '../../enums/post-categories.enum';
 
 import Layout from '../Layout';
 import Loader from '../Loader';
 import Posts from '../Posts';
 
 interface ICategory {
-    readonly category: string;
+    readonly category: PostCategoriesEnum;
 }
 
 const StyledTitle = styled.div`
@@ -34,7 +38,7 @@ const fetchPosts = async (
 ) => {
     const { items: posts } = await contentful().getEntries({
         'content_type': 'post',
-        'fields.category': category,
+        'fields.categories': category,
         locale
     });
 
@@ -42,7 +46,7 @@ const fetchPosts = async (
 };
 
 const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) => {
-    const { locale } = useIntl();
+    const { locale, formatMessage } = useIntl();
     const { category } = match.params;
 
     const [posts, setPosts] = useState([] as IPost[]);
@@ -56,7 +60,9 @@ const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) =>
                 ? (<Loader />)
                 : (
                     <>
-                        <StyledTitle>{category}</StyledTitle>
+                        <StyledTitle>
+                            {formatMessage(messages[category])}
+                        </StyledTitle>
                         <Posts posts={posts} / >
                     </>
                 )

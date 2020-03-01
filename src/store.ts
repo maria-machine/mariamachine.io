@@ -1,10 +1,14 @@
 import { createStore } from 'redux';
 
-import {rootReducer} from './reducers/root-reducer';
+import { rootReducer } from './reducers/root-reducer';
+
+import { config } from './config';
+
+import { LocaleEnum } from './enums/locale.enum';
 
 const initialStateDefault = {
     lang: {
-        locale: 'en'
+        locale: localStorage.getItem(config.localStorage.locale) || navigator.language.split(/[-_]/)[0] || LocaleEnum.EN
     }
 };
 

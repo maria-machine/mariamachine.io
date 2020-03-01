@@ -8,10 +8,12 @@ import messagesEn from '../../translations/en';
 import { IStateLang } from '../../interfaces/state-lang.interface';
 import { IState } from '../../interfaces/state.interface';
 
+import { LocaleEnum } from '../../enums/locale.enum';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const messages: {[key: string]: any} = {
-    'ru': messagesRu,
-    'en': messagesEn
+    [LocaleEnum.RU]: messagesRu,
+    [LocaleEnum.EN]: messagesEn
 };
 
 const IntlProviderWrapper: FunctionComponent = ({children}) => {

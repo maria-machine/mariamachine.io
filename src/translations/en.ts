@@ -1,4 +1,8 @@
+import { PostCategoriesEnum } from '../enums/post-categories.enum';
+
 export default {
-    "app.text": "Edit <code>src/App.js</code> and save to reload.<br/>Now with {what}!",
-    "app.learn-react-link": "Learn React."
+    [`app.categories.${PostCategoriesEnum.TRANSLATIONS}`]: 'translations',
+    [`app.categories.${PostCategoriesEnum.ARTICLES}`]: 'articles',
+    'app.subscribe.title': '💌 subscribe to newsletter!',
+    'app.author': 'author'
 };

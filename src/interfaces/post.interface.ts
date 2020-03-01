@@ -1,7 +1,4 @@
-enum PostCategoryEnum {
-    TRANSLATIONS = 'Translations',
-    ARTICLES = 'Articles'
-}
+import { PostCategoriesEnum } from '../enums/post-categories.enum';
 
 export interface IPost {
     readonly sys: {
@@ -14,7 +11,7 @@ export interface IPost {
         readonly title: string;
         readonly description: string;
         readonly content: string;
-        readonly category: PostCategoryEnum[];
+        readonly categories: PostCategoriesEnum[];
         readonly publicUrl: string;
         readonly featured: boolean;
         readonly originName?: string;
