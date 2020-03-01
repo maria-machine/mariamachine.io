@@ -12,6 +12,8 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/interface-name-prefix
     interface Window {
         contentful: contentful.ContentfulClientApi;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        __REDUX_DEVTOOLS_EXTENSION__: any;
     }
 }
 

@@ -1,12 +1,15 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useIntl } from 'react-intl';
+import { useDispatch } from 'react-redux';
 
 import { setNoScroll } from '../../utils/set-no-scroll';
 
 import logoSvg from './assets/logo.png';
 import arrowRightSvg from './assets/arrow-right.svg';
 import arrowDownSvg from './assets/arrow-down.svg';
+import { setLangLocale } from '../../actionCreators';
 
 export enum LayoutBarPositionEnum {
     LEFT = 'left',
@@ -23,6 +26,10 @@ interface IStyledBar {
 
 interface IStyledContent {
     readonly loader: boolean;
+}
+
+interface IStyledLang {
+    readonly disabled: boolean;
 }
 
 const StyledLayout = styled.div`
@@ -66,6 +73,7 @@ const StyledBar = styled.div<IStyledBar>`
     transition: width 0.3s, height 0.3s;
     z-index: 10;
     border-right: 1px solid #ccc;
+    box-sizing: border-box;
 
     @media (max-width: 1200px) {
         width: 100%;
@@ -90,12 +98,17 @@ const StyledBar = styled.div<IStyledBar>`
 `;
 
 const StyledBarMenu = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     width: 150px;
     background: #fff;
+    padding: 25px 0;
+    box-sizing: border-box;
 
     @media (max-width: 1200px) {
         top: auto;
@@ -109,7 +122,7 @@ const StyledBarMenu = styled.div`
 const StyledContent = styled.div<IStyledContent>`
     position: relative;
     min-height: 100vh;
-    padding: 30px 40px 20px calc(150px + 40px);
+    padding: 30px 40px 30px calc(150px + 40px);
     box-sizing: border-box;
 
     @media (max-width: 1200px) {
@@ -123,11 +136,6 @@ const StyledContent = styled.div<IStyledContent>`
 `;
 
 const StyledLogo = styled.img`
-    position: absolute;
-    top: 25px;
-    left: 0;
-    right: 0;
-    margin: auto;
     width: 90px;
     transition: opacity 0.1s;
 
@@ -144,10 +152,36 @@ const StyledLogo = styled.img`
     }
 `;
 
+const StyledLangs = styled.div``;
+
+const StyledLang = styled.span<IStyledLang>`
+    font-family: 'PT Mono', monospace;
+    font-size: 14px;
+    line-height: 150%;
+    margin-right: 10px;
+    text-transform: uppercase;
+    transition: opacity 0.1s;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    ${({disabled}) => !disabled && `
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    `}
+`;
+
 const Layout: FunctionComponent<ILayout> = ({
     loader = false,
     children
 }) => {
+    const { locale } = useIntl();
+    const reduxDispatch = useDispatch();
+
     const [isBarOpened, setIsBarOpened] = useState(false);
 
     return (
@@ -157,6 +191,28 @@ const Layout: FunctionComponent<ILayout> = ({
                     <Link to='/'>
                         <StyledLogo src={logoSvg} alt='Maria Machine Logo' />
                     </Link>
+                    <StyledLangs>
+                        <StyledLang
+                            disabled={locale === 'en'}
+                            onClick={() => {
+                                if (locale !== 'en') {
+                                    reduxDispatch(setLangLocale('en'));
+                                }
+                            }}
+                        >
+                            Eng
+                        </StyledLang>
+                        <StyledLang
+                            disabled={locale === 'ru'}
+                            onClick={() => {
+                                if (locale !== 'ru') {
+                                    reduxDispatch(setLangLocale('ru'));
+                                }
+                            }}
+                        >
+                            Rus
+                        </StyledLang>
+                    </StyledLangs>
                     <StyledBarMenuArrow onClick={() => {
                         setNoScroll(!isBarOpened);
                         setIsBarOpened(!isBarOpened);

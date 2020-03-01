@@ -1,0 +1,19 @@
+import { createStore } from 'redux';
+
+import {rootReducer} from './reducers/root-reducer';
+
+const initialStateDefault = {
+    lang: {
+        locale: 'en'
+    }
+};
+
+export const configureStore = (initialState = initialStateDefault) => {
+    const store = createStore(
+        rootReducer,
+        {...initialState},
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
+
+    return store;
+};

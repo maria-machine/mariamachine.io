@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import { useIntl } from 'react-intl';
 
 import { contentful } from '../../utils/contentful';
 
@@ -8,15 +9,20 @@ import Layout from '../Layout';
 import Loader from '../Loader';
 import Posts from '../Posts';
 
-const fetchPosts = async (setPosts: Dispatch<SetStateAction<IPost[]>>) => {
-    const { items: posts } = await contentful().getEntries();
+const fetchPosts = async (
+    locale: string,
+    setPosts: Dispatch<SetStateAction<IPost[]>>
+) => {
+    const { items: posts } = await contentful().getEntries({locale});
 
     setPosts(posts as IPost[]);
 };
 
 const Main: FunctionComponent = () => {
+    const { locale } = useIntl();
+
     const [posts, setPosts] = useState([] as IPost[]);
-    useEffect(() => { fetchPosts(setPosts); }, []);
+    useEffect(() => { fetchPosts(locale, setPosts); }, [locale]);
 
     const isLoading = !posts.length;
 

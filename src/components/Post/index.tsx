@@ -15,13 +15,12 @@ const StyledPost = styled.div`
 `;
 
 const StyledCategory = styled(Link)`
-    display: block;
+    display: inline-block;
     font-family: 'PT Mono', monospace;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 150%;
     color: ${colors.mulled};
     text-transform: uppercase;
-    margin-bottom: 10px;
 `;
 
 const StyledTitle = styled(Link)`

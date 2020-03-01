@@ -16,7 +16,10 @@ const StyledPosts = styled.div`
 
 const Posts: FunctionComponent<IPosts> = ({posts}) => (
     <StyledPosts>
-        {posts.map((post) => (<Post key={post.fields.title} post={post} />))}
+        {posts
+            .filter((post) => !!post.fields.title)
+            .map((post) => (<Post key={post.fields.title} post={post} />))
+        }
     </StyledPosts>
 );
 

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
 import { contentful } from '../../utils/contentful';
 
@@ -26,20 +27,26 @@ const StyledTitle = styled.div`
     margin-bottom: 70px;
 `;
 
-const fetchPosts = async (category: string, setPosts: Dispatch<SetStateAction<IPost[]>>) => {
+const fetchPosts = async (
+    locale: string,
+    category: string,
+    setPosts: Dispatch<SetStateAction<IPost[]>>
+) => {
     const { items: posts } = await contentful().getEntries({
         'content_type': 'post',
-        'fields.category': category
+        'fields.category': category,
+        locale
     });
 
     setPosts(posts as IPost[]);
 };
 
 const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) => {
+    const { locale } = useIntl();
     const { category } = match.params;
 
     const [posts, setPosts] = useState([] as IPost[]);
-    useEffect(() => { fetchPosts(category, setPosts); }, []);
+    useEffect(() => { fetchPosts(locale, category, setPosts); }, [category, locale]);
 
     const isLoading = !posts.length;
 
