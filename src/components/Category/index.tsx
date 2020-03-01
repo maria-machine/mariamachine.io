@@ -22,13 +22,16 @@ interface ICategory {
 }
 
 const StyledTitle = styled.div`
+    position: relative;
+    display: inline-block;
     font-family: 'PT Mono', monospace;
     font-size: 54px;
     font-weight: 700;
-    line-height: 100%;
-    color: ${colors.mulled};
-    text-transform: uppercase;
+    line-height: 150%;
+    color: #fff;
+    background: ${colors.mulled};
     margin-bottom: 70px;
+    padding: 5px 18px;
 `;
 
 const fetchPosts = async (
@@ -39,6 +42,7 @@ const fetchPosts = async (
     const { items: posts } = await contentful().getEntries({
         'content_type': 'post',
         'fields.categories': category,
+        order: '-fields.date',
         locale
     });
 

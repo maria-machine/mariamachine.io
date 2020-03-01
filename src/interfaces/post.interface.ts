@@ -9,10 +9,11 @@ export interface IPost {
     };
     readonly fields: {
         readonly title: string;
-        readonly description: string;
+        readonly description?: string;
         readonly content: string;
         readonly categories: PostCategoriesEnum[];
         readonly publicUrl: string;
+        readonly date: string;
         readonly featured: boolean;
         readonly originName?: string;
         readonly originLink?: string;

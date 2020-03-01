@@ -13,7 +13,11 @@ const fetchPosts = async (
     locale: string,
     setPosts: Dispatch<SetStateAction<IPost[]>>
 ) => {
-    const { items: posts } = await contentful().getEntries({locale});
+    const { items: posts } = await contentful().getEntries({
+        'content_type': 'post',
+        order: '-fields.date',
+        locale
+    });
 
     setPosts(posts as IPost[]);
 };

@@ -10,7 +10,6 @@ export interface IConfig {
     };
     readonly localStorage: {
         readonly locale: string;
-        readonly subscribed: string;
     };
     readonly socials: {
         readonly youtube: IConfigLink;
@@ -29,8 +28,7 @@ export const config: IConfig = {
         token: process.env.REACT_APP_CONTENTFUL_TOKEN
     },
     localStorage: {
-        locale: 'MARIA_MACHINE_LOCALE',
-        subscribed: 'MARIA_MACHINE_SUBSCRIBED',
+        locale: 'MARIA_MACHINE_LOCALE'
     },
     socials: {
         youtube: {

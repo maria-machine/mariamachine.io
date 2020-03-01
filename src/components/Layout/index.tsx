@@ -192,7 +192,6 @@ const StyledCategory = styled(Link)`
     font-weight: 700;
     line-height: 150%;
     color: ${colors.mulled};
-    text-transform: uppercase;
 `;
 
 const StyledSocials = styled.div`
@@ -271,7 +270,7 @@ const Layout: FunctionComponent<ILayout> = ({
                                 .map((category) => category.toLowerCase())
                                 .filter((category) => !(locale === LocaleEnum.EN && category === PostCategoriesEnum.TRANSLATIONS))
                                 .map((category) => (
-                                    <StyledCategory to={`/${category}`} key={category}>
+                                    <StyledCategory to={`/categories/${category}`} key={category}>
                                         {formatMessage((messages as {[key: string]: {[key: string]: string}})[category])}
                                     </StyledCategory>
                                 ))

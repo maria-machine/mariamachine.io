@@ -9,6 +9,7 @@ import IntlProviderWrapper from './components/IntlProviderWrapper';
 import Main from './components/Main';
 import Category from './components/Category';
 import SinglePost from './components/SinglePost';
+import Page404 from './components/Page404';
 
 import history from './utils/history';
 
@@ -24,8 +25,9 @@ const App: FunctionComponent = () => {
                 <Router history={history}>
                     <Switch>
                         <Route exact path='/' component={Main} />
-                        <Route path='/posts/:name' component={SinglePost} />
-                        <Route path='/:category' component={Category} />
+                        <Route path='/posts/:publicUrl' component={SinglePost} />
+                        <Route path='/categories/:category' component={Category} />
+                        <Route component={Page404} />
                     </Switch>
                 </Router>
             </IntlProviderWrapper>

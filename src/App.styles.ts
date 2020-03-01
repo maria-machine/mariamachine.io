@@ -64,6 +64,6 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     a:hover {
-        opacity: 0.85;
+        opacity: 0.75;
     }
 `;

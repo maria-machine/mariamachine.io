@@ -1,15 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useIntl } from 'react-intl';
 
 import { IPost } from '../../interfaces/post.interface';
 
-import { PostCategoriesEnum } from '../../enums/post-categories.enum';
-
 import { colors } from '../../variables';
 
-import { messages } from '../../translations';
+import Categories from '../Categories';
 
 interface IPostComponent {
     readonly post: IPost;
@@ -17,22 +14,6 @@ interface IPostComponent {
 
 const StyledPost = styled.div`
     margin-bottom: 50px;
-`;
-
-const StyledCategories = styled.div``;
-
-const StyledCategory = styled(Link)`
-    display: inline-block;
-    font-family: 'PT Mono', monospace;
-    font-size: 14px;
-    line-height: 150%;
-    color: ${colors.mulled};
-    text-transform: uppercase;
-    margin-right: 10px;
-
-    &:last-child {
-        margin-right: 0;
-    }
 `;
 
 const StyledTitle = styled(Link)`
@@ -45,17 +26,9 @@ const StyledTitle = styled(Link)`
 `;
 
 const Post: FunctionComponent<IPostComponent> = ({post}) => {
-    const { formatMessage } = useIntl();
-
     return (
         <StyledPost>
-            <StyledCategories>
-                {post.fields.categories.map((category: PostCategoriesEnum) => (
-                    <StyledCategory key={category} to={`/${category}`}>
-                        {formatMessage(messages[category])}
-                    </StyledCategory>
-                ))}
-            </StyledCategories>
+            <Categories categories={post.fields.categories} />
             <StyledTitle to={`/posts/${post.fields.publicUrl}`}>
                 {post.fields.title}
             </StyledTitle>
