@@ -55,7 +55,7 @@ const StyledBarMenuArrow = styled.div`
     @media (max-width: 1200px) {
         background: url(${arrowDownSvg});
         left: auto;
-        right: 20px;
+        right: 40px;
         width: 40px;
         height: 40px;
     }
@@ -80,11 +80,15 @@ const StyledBarMenu = styled.div`
     border-right: 1px solid #ccc;
 
     @media (max-width: 1200px) {
+        flex-direction: row;
         top: auto;
         left: 0;
         right: 0;
         width: 100%;
-        height: 70px;
+        height: 80px;
+        padding: 0 40px;
+        border: none;
+        border-bottom: 1px solid #ccc;
     }
 `;
 
@@ -101,7 +105,7 @@ const StyledBar = styled.div<IStyledBar>`
 
     @media (max-width: 1200px) {
         width: 100%;
-        height: 70px;
+        height: 80px;
     }
 
     ${({opened}) => opened && `
@@ -119,6 +123,11 @@ const StyledBar = styled.div<IStyledBar>`
         @media (max-width: 1200px) {
             height: 100%;
 
+            ${StyledBarMenu} {
+                border: none;
+                border-top: 1px solid #ccc;
+            }
+
             ${StyledBarMenuArrow} {
                 transform: scaleY(-1);
             }
@@ -127,8 +136,14 @@ const StyledBar = styled.div<IStyledBar>`
 `;
 
 const StyledBarContent = styled.div`
-    padding: 20px calc(150px + 20px) 20px 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px calc(150px + 40px) 30px 40px;
     box-sizing: border-box;
+
+    @media (max-width: 1200px) {
+        padding: 30px 40px calc(80px + 30px) 40px;
+    }
 `;
 
 const StyledContent = styled.div<IStyledContent>`
@@ -138,7 +153,7 @@ const StyledContent = styled.div<IStyledContent>`
     box-sizing: border-box;
 
     @media (max-width: 1200px) {
-        padding: 70px 0 0 0;
+        padding: calc(80px + 30px) 40px 30px 40px;
     }
 
     ${({loader}) => loader && `
@@ -161,10 +176,16 @@ const StyledLogo = styled.img`
         left: 20px;
         right: auto;
         width: 60px;
+        margin-right: 20px;
     }
 `;
 
-const StyledLangs = styled.div``;
+const StyledLangs = styled.div`
+    @media (max-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+    }
+`;
 
 const StyledLang = styled(Lang)`
     font-family: 'PT Mono', monospace;
@@ -197,6 +218,7 @@ const StyledCategory = styled(Link)`
 const StyledSocials = styled.div`
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 40px;
 `;
 
 const StyledSocial = styled.a`
@@ -237,9 +259,6 @@ const StyledSubscribe = styled.a`
 `;
 
 const StyledAuthor = styled.a`
-    position: absolute;
-    bottom: 0;
-    left: 30px;
     font-family: 'PT Mono', monospace;
     font-size: 70px;
     font-weight: 700;
