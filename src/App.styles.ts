@@ -59,6 +59,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     a {
+        color: #000;
         text-decoration: none;
         transition: opacity 0.1s;
     }

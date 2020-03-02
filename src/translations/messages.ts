@@ -14,5 +14,11 @@ export const messages = defineMessages({
     },
     author: {
         id: 'app.author'
+    },
+    page404: {
+        id: 'app.404'
+    },
+    page404more: {
+        id: 'app.404.more'
     }
 });
