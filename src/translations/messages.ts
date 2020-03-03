@@ -20,5 +20,8 @@ export const messages = defineMessages({
     },
     page404more: {
         id: 'app.404.more'
+    },
+    contactsCategory: {
+        id: 'app.contacts.category'
     }
 });

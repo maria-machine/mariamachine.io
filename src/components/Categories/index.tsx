@@ -16,7 +16,6 @@ const StyledCategories = styled.div``;
 
 const StyledCategory = styled(Link)`
     display: inline-block;
-    font-family: 'PT Mono', monospace;
     font-size: 14px;
     line-height: 150%;
     color: #fff;

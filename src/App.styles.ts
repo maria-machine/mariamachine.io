@@ -31,6 +31,10 @@ export const GlobalStyle = createGlobalStyle`
         vertical-align: baseline;
     }
 
+    body {
+        font-family: 'Montserrat', sans-serif;
+    }
+
     article, aside, details, figcaption, figure,
     footer, header, hgroup, menu, nav, section {
         display: block;
@@ -54,14 +58,10 @@ export const GlobalStyle = createGlobalStyle`
         border-spacing: 0;
     }
 
-    .no-scroll {
-        overflow: hidden;
-    }
-
     a {
         color: #000;
         text-decoration: none;
-        transition: opacity 0.1s;
+        transition: opacity 0.2s;
     }
 
     a:hover {

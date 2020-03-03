@@ -21,12 +21,9 @@ const StyledCategories = styled.div`
 `;
 
 const StyledTitle = styled.h1`
-    font-family: 'PT Serif', sans-serif;
     font-size: 54px;
-    font-weight: 700;
     line-height: 133%;
     color: ${colors.moccaccino};
-    text-transform: uppercase;
     margin: 0 0 70px 0;
 `;
 

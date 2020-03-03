@@ -6,5 +6,6 @@ export default {
     'app.subscribe.title': '💌 subscribe to newsletter!',
     'app.author': 'author',
     'app.404': 'Page not found.',
-    'app.404.more': 'Let\'s try again!'
+    'app.404.more': 'Let\'s try again!',
+    'app.contacts.category': 'contacts'
 };

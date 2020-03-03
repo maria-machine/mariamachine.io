@@ -24,7 +24,6 @@ interface ICategory {
 const StyledTitle = styled.div`
     position: relative;
     display: inline-block;
-    font-family: 'PT Mono', monospace;
     font-size: 54px;
     font-weight: 700;
     line-height: 150%;
@@ -59,7 +58,7 @@ const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) =>
     const isLoading = !posts.length;
 
     return (
-        <Layout loader={isLoading}>
+        <Layout contentCenter={isLoading}>
             {isLoading
                 ? (<Loader />)
                 : (

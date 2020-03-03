@@ -31,7 +31,7 @@ const Main: FunctionComponent = () => {
     const isLoading = !posts.length;
 
     return (
-        <Layout loader={isLoading}>
+        <Layout contentCenter={isLoading}>
             {isLoading
                 ? (<Loader />)
                 : (<Posts posts={posts} / >)

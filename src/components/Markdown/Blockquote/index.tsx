@@ -20,7 +20,6 @@ const StyledBlockquote = styled.div`
     }
 
     p {
-        font-family: 'PT Mono', monospace;
         font-weight: 300;
     }
 

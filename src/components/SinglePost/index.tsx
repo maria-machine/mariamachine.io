@@ -45,7 +45,7 @@ const SinglePost: FunctionComponent<RouteComponentProps<ISinglePost>> = ({match}
     }
 
     return (
-        <Layout loader={isLoading}>
+        <Layout contentCenter={isLoading}>
             {isLoading
                 ? (<Loader />)
                 : (<Content post={post} / >)

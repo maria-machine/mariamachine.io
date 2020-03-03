@@ -10,7 +10,6 @@ import Link from './Link';
 import Blockquote from './Blockquote';
 
 const StyledMarkdown = styled.div`
-    font-family: 'PT Serif', sans-serif;
     font-size: 21px;
     line-height: 160%;
     color: #000;
@@ -26,7 +25,6 @@ const StyledMarkdown = styled.div`
 
     a {
         position: relative;
-        font-family: 'PT Mono', monospace;
         color: #000;
         text-decoration: none;
     }
