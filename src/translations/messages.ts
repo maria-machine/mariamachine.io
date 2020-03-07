@@ -23,5 +23,23 @@ export const messages = defineMessages({
     },
     contactsCategory: {
         id: 'app.contacts.category'
+    },
+    subscriptionEmail: {
+        id: 'app.subscription.email'
+    },
+    subscriptionSubscribe: {
+        id: 'app.subscription.subscribe'
+    },
+    subscriptionProcessing: {
+        id: 'app.subscription.processing'
+    },
+    subscriptionSuccess: {
+        id: 'app.subscription.success'
+    },
+    origin: {
+        id: 'app.origin'
+    },
+    share: {
+        id: 'app.share'
     }
 });

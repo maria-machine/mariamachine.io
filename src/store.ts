@@ -7,6 +7,7 @@ import { config } from './config';
 import { LocaleEnum } from './enums/locale.enum';
 
 const initialStateDefault = {
+    subscription: localStorage.getItem(config.localStorage.subscription) === 'true' || false,
     lang: {
         locale: localStorage.getItem(config.localStorage.locale) || navigator.language.split(/[-_]/)[0] || LocaleEnum.EN
     },

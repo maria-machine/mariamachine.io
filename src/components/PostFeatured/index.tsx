@@ -14,6 +14,7 @@ import { ColorsEnum } from '../../enums/colors.enum';
 
 interface IPostFeatured {
     readonly post: IPost;
+    readonly staticMode?: boolean;
 }
 
 interface IStyledPostFeatured {
@@ -83,7 +84,9 @@ const StyledDescription = styled.div<IStyledDescription>`
     box-sizing: border-box;
 
     ${({cover}) => !cover && `
-        padding: 10px 10px 10px 4vw;
+        padding: 0 2vw;
+        max-width: 780px;
+        margin: auto;
     `}
 `;
 
@@ -97,9 +100,10 @@ const StyledLink = styled(Link)`
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 20;
 `;
 
-const PostFeatured: FunctionComponent<IPostFeatured> = ({post}) => {
+const PostFeatured: FunctionComponent<IPostFeatured> = ({post, staticMode}) => {
     const { locale, formatMessage } = useIntl();
 
     const {
@@ -144,7 +148,7 @@ const PostFeatured: FunctionComponent<IPostFeatured> = ({post}) => {
                     }
                 </StyledDate>
             </StyledDescription>
-            <StyledLink to={`/posts/${publicUrl}`} />
+            { !staticMode ? (<StyledLink to={`/posts/${publicUrl}`} />) : null}
         </StyledPostFeatured>
     );
 };

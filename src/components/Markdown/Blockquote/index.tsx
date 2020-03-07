@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
+import { ColorsEnum } from '../../../enums/colors.enum';
+
 const StyledBlockquote = styled.div`
     position: relative;
     padding-left: 20px;
@@ -14,7 +16,7 @@ const StyledBlockquote = styled.div`
         left: 0;
         width: 4px;
         height: 100%;
-        background: blue;
+        background: ${ColorsEnum.CREAM};
     }
 
     p {

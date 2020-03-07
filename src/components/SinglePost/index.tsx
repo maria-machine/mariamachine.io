@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
 import { RouteComponentProps } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
@@ -9,10 +10,18 @@ import { IPost } from '../../interfaces/post.interface';
 import Loader from '../Loader';
 import Content from './Content';
 import Page404 from '../Page404';
+import PostFeatured from '../PostFeatured';
 
 interface ISinglePost {
     readonly publicUrl: string;
 }
+
+const StyledSinglePost = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+`;
 
 const fetchPost = async (
     locale: string,
@@ -44,12 +53,17 @@ const SinglePost: FunctionComponent<RouteComponentProps<ISinglePost>> = ({match}
     }
 
     return (
-        <>
+        <StyledSinglePost>
             {isLoading
                 ? (<Loader />)
-                : (<Content post={post} / >)
+                : (
+                    <>
+                        <PostFeatured post={post} staticMode />
+                        <Content post={post} / >
+                    </>
+                )
             }
-        </>
+        </StyledSinglePost>
     );
 };
 

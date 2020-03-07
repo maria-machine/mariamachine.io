@@ -2,8 +2,14 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { useIntl } from 'react-intl';
+import { useWindowScroll } from 'react-use';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setLayoutCategoriesColor } from '../../actionCreators';
 
 import { messages } from '../../translations';
+
+import { IState } from '../../interfaces/state.interface';
 
 import { CategoriesEnum } from '../../enums/categories.enum';
 import { LocaleEnum } from '../../enums/locale.enum';
@@ -12,23 +18,22 @@ import { ColorsEnum } from '../../enums/colors.enum';
 import logoSvg from './assets/logo.png';
 
 import Lang from '../Lang';
-import { useSelector, useDispatch } from 'react-redux';
-import { IState } from '../../interfaces/state.interface';
-import { setLayoutCategoriesColor } from '../../actionCreators';
-
-export enum LayoutBarPositionEnum {
-    LEFT = 'left',
-    RIGHT = 'right'
-}
+import Footer from '../Footer';
 
 interface IStyledCategory {
     readonly active: boolean;
     readonly activeColor?: ColorsEnum;
 }
 
+interface IStyledMenu {
+    readonly small: boolean;
+}
+
 const StyledLayout = styled.div`
     min-height: 100vh;
     min-width: 100vw;
+    padding-top: 8vw;
+    box-sizing: border-box;
 `;
 
 const StyledContent = styled.div`
@@ -38,24 +43,10 @@ const StyledContent = styled.div`
     box-sizing: border-box;
 `;
 
-const StyledMenu = styled.div`
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 8vw;
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 0 2vw;
-    box-sizing: border-box;
-`;
-
-const StyledCategories = styled.div`
-    display: flex;
-    align-items: stretch;
-    height:inherit;
-    margin-left: auto;
+const StyledLogo = styled.img`
+    width: 6vw;
+    margin-left: -0.8vw;
+    transition: width 0.2s;
 `;
 
 const StyledCategory = styled.div<IStyledCategory>`
@@ -68,7 +59,7 @@ const StyledCategory = styled.div<IStyledCategory>`
         height: 100%;
         padding: 0 1.5vw;
         background: transparent;
-        transition: background 0.2s;
+        transition: background 0.2s, font-size 0.2s;
         font-size: 1.5vw;
         font-weight: 700;
         line-height: 150%;
@@ -106,17 +97,45 @@ const StyledCategory = styled.div<IStyledCategory>`
     `}
 `;
 
-const StyledLogo = styled.img`
-    width: 6vw;
-    margin-left: -0.8vw;
+const StyledHeader = styled.header<IStyledMenu>`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 8vw;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 0 2vw;
+    box-sizing: border-box;
+    transition: height 0.2s;
+
+    ${({small}) => small && `
+        height: 5vw;
+
+        ${StyledLogo} {
+            width: 4vw;
+        }
+
+        ${StyledCategory} {
+            a {
+                font-size: 1vw;
+            }
+        }
+    `}
+`;
+
+const StyledCategories = styled.div`
+    display: flex;
+    align-items: stretch;
+    height:inherit;
+    margin-left: auto;
 `;
 
 const StyledLangs = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-    margin-top: auto;
-    margin-bottom: 10px;
 `;
 
 const StyledLang = styled(Lang)`
@@ -139,9 +158,11 @@ const Layout: FunctionComponent = ({
     const { pathname } = useLocation();
     const { color: categoryActiveColor } = useSelector((state: IState) => state.layout.categories);
 
+    const { y: windowScrollY } = useWindowScroll();
+
     return (
         <StyledLayout>
-            <StyledMenu>
+            <StyledHeader small={windowScrollY >= 100}>
                 <Link to='/'>
                     <StyledLogo src={logoSvg} alt='Maria Machine Logo' />
                 </Link>
@@ -183,10 +204,11 @@ const Layout: FunctionComponent = ({
                         </Link>
                     </StyledCategory>
                 </StyledCategories>
-            </StyledMenu>
+            </StyledHeader>
             <StyledContent>
                 {children}
             </StyledContent>
+            <Footer />
         </StyledLayout>
     );
 };

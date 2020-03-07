@@ -1,18 +1,21 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, Fragment } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
 import Masonry from 'react-masonry-component';
 
+import { setLayoutCategoriesColor } from '../../actionCreators';
+
 import { config } from '../../config';
 
 import { IPost } from '../../interfaces/post.interface';
 
+import { ColorsEnum } from '../../enums/colors.enum';
+
 import PostFeatured from '../PostFeatured';
 import PostRegular from '../PostRegular';
 import PostMini from '../PostMini';
-import { setLayoutCategoriesColor } from '../../actionCreators';
-import { ColorsEnum } from '../../enums/colors.enum';
+import Subscription from '../Subscription';
 
 interface IPosts {
     readonly posts: IPost[];
@@ -49,7 +52,24 @@ const Posts: FunctionComponent<IPosts> = ({posts}) => {
                     {
                         availablePosts
                             .filter((post, i) => i !== 0)
-                            .map((post) => {
+                            .map((post, i) => {
+                                if (i === 2) {
+                                    return (
+                                        <Fragment key={post.fields.title}>
+                                            <Subscription />
+                                            {
+                                                !post.fields.cover
+                                                    ? (
+                                                        <PostMini post={post} />
+                                                    )
+                                                    : (
+                                                        <PostRegular post={post} />
+                                                    )
+                                            }
+                                        </Fragment>
+                                    );
+                                }
+
                                 if (!post.fields.cover) {
                                     return (<PostMini key={post.fields.title} post={post} />);
                                 }

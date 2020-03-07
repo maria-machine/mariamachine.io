@@ -18,7 +18,8 @@ const StyledTitle = styled.div`
     text-align: center;
 
     img {
-        max-width: 50vw;
+        width: 50vw;
+        max-width: 100%;
     }
 `;
 

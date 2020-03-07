@@ -6,6 +6,10 @@ import 'highlight.js/styles/atom-one-dark.css';
 
 import Link from './Link';
 import Blockquote from './Blockquote';
+import Image from './Image';
+import Hr from './Hr';
+
+import { ColorsEnum } from '../../enums/colors.enum';
 
 const StyledMarkdown = styled.div`
     font-size: 21px;
@@ -37,10 +41,6 @@ const StyledMarkdown = styled.div`
         background: #000;
     }
 
-    p, ul, pre {
-        margin-bottom: 42px;
-    }
-
     code {
         font-size: 15px;
         line-height: 130%;
@@ -49,6 +49,18 @@ const StyledMarkdown = styled.div`
     p code {
         padding: 4px 8px;
         background: rgba(0, 0, 0, 0.05);
+    }
+
+    p, ul, pre, hr {
+        margin-bottom: 42px;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    p + img {
+        text-align: center;
     }
 
     li {
@@ -64,11 +76,7 @@ const StyledMarkdown = styled.div`
         width: 6px;
         height: 6px;
         border-radius: 50px;
-        background: blue;
-    }
-
-    img {
-        max-width: 100%;
+        background: ${ColorsEnum.CREAM};
     }
 `;
 
@@ -92,6 +100,8 @@ const Markdown: FunctionComponent = ({children}) => {
                             script: { component: () => <div /> },
                             a: { component: Link },
                             blockquote: { component: Blockquote },
+                            img: { component: Image },
+                            hr: { component: Hr }
                         }
                     }}
                 >

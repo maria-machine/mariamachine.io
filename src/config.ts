@@ -13,6 +13,12 @@ export interface IConfig {
     };
     readonly localStorage: {
         readonly locale: string;
+        readonly subscription: string;
+    };
+    readonly mailchimp: {
+        readonly client?: string;
+        readonly u?: string;
+        readonly id?: string;
     };
     readonly socials: {
         readonly youtube: IConfigLink;
@@ -34,7 +40,13 @@ export const config: IConfig = {
         token: process.env.REACT_APP_CONTENTFUL_TOKEN
     },
     localStorage: {
-        locale: 'MARIA_MACHINE_LOCALE'
+        locale: 'MARIA_MACHINE_LOCALE',
+        subscription: 'MARIA_MACHINE_SUBSCRIPTION'
+    },
+    mailchimp: {
+        client: process.env.REACT_APP_MAILCHIMP_CLIENT,
+        u: process.env.REACT_APP_MAILCHIMP_U,
+        id: process.env.REACT_APP_MAILCHIMP_ID
     },
     socials: {
         youtube: {
