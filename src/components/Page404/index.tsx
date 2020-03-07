@@ -3,22 +3,28 @@ import styled from 'styled-components';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
-import { colors } from '../../variables';
 import { messages } from '../../translations';
 
-import Layout from '../Layout';
+import mariaMachineRobotPng from './assets/maria-machine-robot.png';
 
-const StyledTitle = styled.h1`
-    font-size: 300px;
-    font-weight: 700;
-    line-height: 100%;
-    color: ${colors.moccaccino};
-    text-transform: uppercase;
-    text-align: center;
+const StyledPage404 = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 `;
 
-const StyledDescription = styled.div`
+const StyledTitle = styled.div`
+    text-align: center;
+
+    img {
+        max-width: 50vw;
+    }
+`;
+
+const StyledDescription = styled.h1`
     font-size: 24px;
+    font-weight: 400;
     line-height: 150%;
     text-align: center;
 
@@ -45,14 +51,14 @@ const Page404: FunctionComponent = () => {
     const { formatMessage } = useIntl();
 
     return (
-        <Layout contentCenter>
+        <StyledPage404>
             <StyledTitle>
-                <span role='img' aria-label='robot'>🤖</span>
+                <img src={mariaMachineRobotPng} alt='Logo Maria Machine Robot' />
             </StyledTitle>
             <StyledDescription>
                 <span>{formatMessage(messages.page404)}</span> <Link to='/'>{formatMessage(messages.page404more)}</Link>
             </StyledDescription>
-        </Layout>
+        </StyledPage404>
     );
 };
 

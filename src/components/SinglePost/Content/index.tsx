@@ -1,11 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-import { colors } from '../../../variables';
-
 import { IPost } from '../../../interfaces/post.interface';
 
-import Categories from '../../Categories';
 import Markdown from '../../Markdown';
 
 interface IContent {
@@ -16,23 +13,16 @@ const StyledContent = styled.div`
     max-width: 700px;
 `;
 
-const StyledCategories = styled.div`
-    margin-bottom: 100px;
-`;
-
 const StyledTitle = styled.h1`
     font-size: 54px;
     line-height: 133%;
-    color: ${colors.moccaccino};
+    color: pink;
     margin: 0 0 70px 0;
 `;
 
 const Content: FunctionComponent<IContent> = ({post}) => {
     return (
         <StyledContent>
-            <StyledCategories>
-                <Categories categories={post.fields.categories} />
-            </StyledCategories>
             <StyledTitle>
                 {post.fields.title}
             </StyledTitle>

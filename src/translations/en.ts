@@ -1,8 +1,8 @@
-import { PostCategoriesEnum } from '../enums/post-categories.enum';
+import { CategoriesEnum } from '../enums/categories.enum';
 
 export default {
-    [`app.categories.${PostCategoriesEnum.TRANSLATIONS}`]: 'translations',
-    [`app.categories.${PostCategoriesEnum.ARTICLES}`]: 'articles',
+    [`app.categories.${CategoriesEnum.TRANSLATIONS}`]: 'translations',
+    [`app.categories.${CategoriesEnum.ARTICLES}`]: 'articles',
     'app.subscribe.title': '💌 subscribe to newsletter!',
     'app.author': 'author',
     'app.404': 'Page not found.',

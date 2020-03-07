@@ -1,36 +1,26 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
+import { RouteComponentProps } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
 import { contentful } from '../../utils/contentful';
 
-import { colors } from '../../variables';
-
-import { messages } from '../../translations';
-
 import { IPost } from '../../interfaces/post.interface';
 
-import { PostCategoriesEnum } from '../../enums/post-categories.enum';
+import { CategoriesEnum } from '../../enums/categories.enum';
+import { LocaleEnum } from '../../enums/locale.enum';
 
-import Layout from '../Layout';
 import Loader from '../Loader';
 import Posts from '../Posts';
+import Page404 from '../Page404';
 
 interface ICategory {
-    readonly category: PostCategoriesEnum;
+    readonly category: CategoriesEnum;
 }
 
-const StyledTitle = styled.div`
-    position: relative;
-    display: inline-block;
-    font-size: 54px;
-    font-weight: 700;
-    line-height: 150%;
-    color: #fff;
-    background: ${colors.mulled};
-    margin-bottom: 70px;
-    padding: 5px 18px;
+const StyledCategory = styled.div`
+    display: flex;
+    width: 100%;
 `;
 
 const fetchPosts = async (
@@ -49,28 +39,25 @@ const fetchPosts = async (
 };
 
 const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) => {
-    const { locale, formatMessage } = useIntl();
+    const { locale } = useIntl();
     const { category } = match.params;
-
     const [posts, setPosts] = useState([] as IPost[]);
+
     useEffect(() => { fetchPosts(locale, category, setPosts); }, [category, locale]);
 
     const isLoading = !posts.length;
 
+    if (locale === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS) {
+        return (<Page404 />);
+    }
+
     return (
-        <Layout contentCenter={isLoading}>
+        <StyledCategory>
             {isLoading
                 ? (<Loader />)
-                : (
-                    <>
-                        <StyledTitle>
-                            {formatMessage(messages[category])}
-                        </StyledTitle>
-                        <Posts posts={posts} / >
-                    </>
-                )
+                : (<Posts posts={posts} / >)
             }
-        </Layout>
+        </StyledCategory>
     );
 };
 

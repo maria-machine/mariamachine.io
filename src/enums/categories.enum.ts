@@ -1,4 +1,4 @@
-export enum PostCategoriesEnum {
+export enum CategoriesEnum {
     TRANSLATIONS = 'translations',
     ARTICLES = 'articles'
 }

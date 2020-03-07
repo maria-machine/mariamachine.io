@@ -4,6 +4,9 @@ export interface IConfigLink {
 }
 
 export interface IConfig {
+    readonly app: {
+        readonly dev: boolean;
+    };
     readonly contentful: {
         readonly space?: string;
         readonly token?: string;
@@ -23,6 +26,9 @@ export interface IConfig {
 }
 
 export const config: IConfig = {
+    app: {
+        dev: process.env.REACT_APP_DEV === 'true'
+    },
     contentful: {
         space: process.env.REACT_APP_CONTENTFUL_SPACE,
         token: process.env.REACT_APP_CONTENTFUL_TOKEN

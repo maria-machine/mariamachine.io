@@ -9,6 +9,9 @@ import { LocaleEnum } from './enums/locale.enum';
 const initialStateDefault = {
     lang: {
         locale: localStorage.getItem(config.localStorage.locale) || navigator.language.split(/[-_]/)[0] || LocaleEnum.EN
+    },
+    layout: {
+        categories: {}
     }
 };
 

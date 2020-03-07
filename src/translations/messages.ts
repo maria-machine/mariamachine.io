@@ -1,13 +1,13 @@
 import { defineMessages } from 'react-intl';
 
-import { PostCategoriesEnum } from '../enums/post-categories.enum';
+import { CategoriesEnum } from '../enums/categories.enum';
 
 export const messages = defineMessages({
-    [PostCategoriesEnum.TRANSLATIONS]: {
-        id: `app.categories.${PostCategoriesEnum.TRANSLATIONS}`
+    [CategoriesEnum.TRANSLATIONS]: {
+        id: `app.categories.${CategoriesEnum.TRANSLATIONS}`
     },
-    [PostCategoriesEnum.ARTICLES]: {
-        id: `app.categories.${PostCategoriesEnum.ARTICLES}`
+    [CategoriesEnum.ARTICLES]: {
+        id: `app.categories.${CategoriesEnum.ARTICLES}`
     },
     subscribeTitle: {
         id: 'app.subscribe.title'

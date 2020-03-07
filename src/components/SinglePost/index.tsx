@@ -6,7 +6,6 @@ import { contentful } from '../../utils/contentful';
 
 import { IPost } from '../../interfaces/post.interface';
 
-import Layout from '../Layout';
 import Loader from '../Loader';
 import Content from './Content';
 import Page404 from '../Page404';
@@ -45,12 +44,12 @@ const SinglePost: FunctionComponent<RouteComponentProps<ISinglePost>> = ({match}
     }
 
     return (
-        <Layout contentCenter={isLoading}>
+        <>
             {isLoading
                 ? (<Loader />)
                 : (<Content post={post} / >)
             }
-        </Layout>
+        </>
     );
 };
 

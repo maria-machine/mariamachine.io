@@ -1,4 +1,28 @@
-import { PostCategoriesEnum } from '../enums/post-categories.enum';
+import { Asset } from 'contentful';
+
+import { CategoriesEnum } from '../enums/categories.enum';
+import { ColorsEnum } from '../enums/colors.enum';
+
+interface IAsset {
+    readonly sys: {
+        readonly id: string;
+    };
+    readonly fields: {
+        readonly title: string;
+        readonly file: {
+            readonly url: string;
+            readonly details: {
+                readonly size: number;
+                readonly image: {
+                    readonly width: number;
+                    readonly height: number;
+                };
+            };
+            readonly fileName: string;
+            readonly contentType: string;
+        };
+    };
+}
 
 export interface IPost {
     readonly sys: {
@@ -11,10 +35,12 @@ export interface IPost {
         readonly title: string;
         readonly description?: string;
         readonly content: string;
-        readonly categories: PostCategoriesEnum[];
+        readonly cover?: Asset;
+        readonly coverColor?: ColorsEnum;
+        readonly categories: CategoriesEnum[];
         readonly publicUrl: string;
         readonly date: string;
-        readonly featured: boolean;
+        readonly showOnProduction: boolean;
         readonly originName?: string;
         readonly originLink?: string;
         readonly originAuthor?: string;

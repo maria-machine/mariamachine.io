@@ -4,8 +4,6 @@ import MarkdownToJSX from 'markdown-to-jsx';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 
-import { colors } from '../../variables';
-
 import Link from './Link';
 import Blockquote from './Blockquote';
 
@@ -66,7 +64,7 @@ const StyledMarkdown = styled.div`
         width: 6px;
         height: 6px;
         border-radius: 50px;
-        background: ${colors.peru};
+        background: blue;
     }
 
     img {

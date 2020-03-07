@@ -1,13 +1,18 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
 import { useIntl } from 'react-intl';
 
 import { contentful } from '../../utils/contentful';
 
 import { IPost } from '../../interfaces/post.interface';
 
-import Layout from '../Layout';
 import Loader from '../Loader';
 import Posts from '../Posts';
+
+const StyledMain = styled.div`
+    display: flex;
+    width: 100%;
+`;
 
 const fetchPosts = async (
     locale: string,
@@ -31,12 +36,12 @@ const Main: FunctionComponent = () => {
     const isLoading = !posts.length;
 
     return (
-        <Layout contentCenter={isLoading}>
+        <StyledMain>
             {isLoading
                 ? (<Loader />)
                 : (<Posts posts={posts} / >)
             }
-        </Layout>
+        </StyledMain>
     );
 };
 
