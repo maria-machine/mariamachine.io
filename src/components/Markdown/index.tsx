@@ -78,6 +78,18 @@ const StyledMarkdown = styled.div`
         border-radius: 50px;
         background: ${ColorsEnum.CREAM};
     }
+
+    @media (max-width: 720px) {
+        font-size: 18px;
+
+        h2 {
+            font-size: 28px;
+        }
+
+        p, ul, pre, hr {
+            margin-bottom: 20px;
+        }
+    }
 `;
 
 const Markdown: FunctionComponent = ({children}) => {

@@ -24,16 +24,31 @@ const StyledTitle = styled.div`
     font-size: 4vw;
     font-weight: 700;
     margin: 1vw 0 0.5vw;
+
+    @media (max-width: 720px) {
+        font-size: 5vw;
+        text-align: center;
+        margin: 1.5vw 0 1vw;
+    }
 `;
 
 const StyledDate = styled.div`
     font-size: 1vw;
+
+    @media (max-width: 720px) {
+        font-size: 2.5vw;
+        text-align: center;
+    }
 `;
 
 const StyledCategory = styled.div`
     font-size: 1vw;
     text-transform: uppercase;
     z-index: 15;
+
+    @media (max-width: 720px) {
+        font-size: 2.5vw;
+    }
 `;
 
 const StyledPostRegular = styled.div<IStyledPostRegular>`
@@ -44,6 +59,17 @@ const StyledPostRegular = styled.div<IStyledPostRegular>`
     padding: 4vw;
     box-sizing: border-box;
     transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    @media (max-width: 720px) {
+        flex-direction: column;
+        padding: 4vw;
+        box-sizing: border-box;
+        width: 100%;
+    }
 
     ${({coverColor}) => `
         background: ${coverColor};
@@ -60,10 +86,6 @@ const StyledPostRegular = styled.div<IStyledPostRegular>`
             color: ${COVER_COLORS_MAP[coverColor].date}
         }
     `}
-
-    &:hover {
-        opacity: 0.85;
-    }
 `;
 
 const StyledCover = styled.img`
@@ -71,15 +93,31 @@ const StyledCover = styled.img`
     top: 4vw;
     right: 4vw;
     height: 20vw;
+
+    @media (max-width: 720px) {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 30vw;
+        height: auto;
+    }
 `;
 
 const StyledDescription = styled.div`
     position: relative;
     padding-top: 20vw;
+
+    @media (max-width: 720px) {
+        padding: 2.5vw 0 0;
+    }
 `;
 
 const StyledCategories = styled.div`
     display: flex;
+
+    @media (max-width: 720px) {
+        justify-content: center;
+    }
 `;
 
 const StyledLink = styled(Link)`

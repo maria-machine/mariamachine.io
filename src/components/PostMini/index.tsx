@@ -28,12 +28,27 @@ const StyledPostMini = styled.div`
     &:hover {
         opacity: 0.85;
     }
+
+    @media (max-width: 720px) {
+        padding: 4vw;
+        box-sizing: border-box;
+        width: 100%;
+
+        & + & {
+            border-top: 1px solid ${ColorsEnum.GREY};
+        }
+    }
 `;
 
 const StyledTitle = styled.div`
     font-size: 4vw;
     font-weight: 700;
-    margin: 1vw 0 0.5vw;
+    margin-bottom: 0.5vw;
+
+    @media (max-width: 720px) {
+        font-size: 5vw;
+        margin-bottom: 1vw;
+    }
 `;
 
 const StyledInformation = styled.div`
@@ -42,6 +57,10 @@ const StyledInformation = styled.div`
 
 const StyledDate = styled.div`
     font-size: 1vw;
+
+    @media (max-width: 720px) {
+        font-size: 2.5vw;
+    }
 `;
 
 const StyledCategories = styled.div`
@@ -60,6 +79,10 @@ const StyledCategory = styled.div`
 
     &:last-child {
         margin-right: 15px;
+    }
+
+    @media (max-width: 720px) {
+        font-size: 2.5vw;
     }
 `;
 

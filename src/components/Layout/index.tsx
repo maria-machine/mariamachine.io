@@ -34,6 +34,10 @@ const StyledLayout = styled.div`
     min-width: 100vw;
     padding-top: 8vw;
     box-sizing: border-box;
+
+    @media (max-width: 720px) {
+        padding-top: 11vw;
+    }
 `;
 
 const StyledContent = styled.div`
@@ -41,12 +45,31 @@ const StyledContent = styled.div`
     display: flex;
     min-height: calc(100vh - 8vw);
     box-sizing: border-box;
+
+    @media (max-width: 720px) {
+        min-height: calc(100vh - 11vw);
+    }
+`;
+
+const StyledLogoLink = styled(Link)`
+    display: flex;
 `;
 
 const StyledLogo = styled.img`
-    width: 6vw;
-    margin-left: -0.8vw;
+    width: 7vw;
     transition: width 0.2s;
+`;
+
+const StyledLang = styled(Lang)`
+    font-size: 1vw;
+    line-height: 150%;
+    margin-right: 10px;
+    text-transform: lowercase;
+    transition: opacity 0.1s;
+
+    &:last-child {
+        margin-right: 0;
+    }
 `;
 
 const StyledCategory = styled.div<IStyledCategory>`
@@ -106,20 +129,40 @@ const StyledHeader = styled.header<IStyledMenu>`
     position: fixed;
     top: 0;
     z-index: 1000;
-    padding: 0 2vw;
+    padding: 0 4vw;
     box-sizing: border-box;
     transition: height 0.2s;
 
-    ${({small}) => small && `
-        height: 5vw;
+    @media (max-width: 720px) {
+        height: 11vw;
 
         ${StyledLogo} {
-            width: 4vw;
+            width: 10vw;
         }
 
         ${StyledCategory} {
             a {
-                font-size: 1vw;
+                font-size: 2.5vw;
+            }
+        }
+
+        ${StyledLang} {
+            font-size: 2vw;
+        }
+    }
+
+    ${({small}) => small && `
+        @media (min-width: 720px) {
+            height: 5vw;
+
+            ${StyledLogo} {
+                width: 4vw;
+            }
+
+            ${StyledCategory} {
+                a {
+                    font-size: 1vw;
+                }
             }
         }
     `}
@@ -135,19 +178,7 @@ const StyledCategories = styled.div`
 const StyledLangs = styled.div`
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
-`;
-
-const StyledLang = styled(Lang)`
-    font-size: 14px;
-    line-height: 150%;
-    margin-right: 10px;
-    text-transform: lowercase;
-    transition: opacity 0.1s;
-
-    &:last-child {
-        margin-right: 0;
-    }
+    margin-left: 0.7vw;
 `;
 
 const Layout: FunctionComponent = ({
@@ -163,9 +194,9 @@ const Layout: FunctionComponent = ({
     return (
         <StyledLayout>
             <StyledHeader small={windowScrollY >= 100}>
-                <Link to='/'>
+                <StyledLogoLink to='/'>
                     <StyledLogo src={logoSvg} alt='Maria Machine Logo' />
-                </Link>
+                </StyledLogoLink>
                 <StyledLangs>
                     <StyledLang localeName={LocaleEnum.EN}>
                         Eng

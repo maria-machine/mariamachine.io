@@ -27,14 +27,14 @@ const StyledFooter = styled.footer`
     align-items: center;
     background: ${ColorsEnum.GREY};
     color: #fff;
-    padding: 5vw 2vw;
+    padding: 5vw 4vw;
     z-index: 20;
 `;
 
 const StyledSocial = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 3vw;
+    margin-top: 4vw;
 
     &:first-child {
         margin-top: 0;

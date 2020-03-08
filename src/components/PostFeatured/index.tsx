@@ -29,16 +29,31 @@ const StyledCategory = styled.div`
     font-size: 1vw;
     text-transform: uppercase;
     z-index: 15;
+
+    @media (max-width: 720px) {
+        font-size: 2.5vw;
+    }
 `;
 
 const StyledTitle = styled.div`
     font-size: 4vw;
     font-weight: 700;
     margin: 1vw 0 0.5vw;
+
+    @media (max-width: 720px) {
+        font-size: 6vw;
+        text-align: center;
+        margin: 1.5vw 0 1vw;
+    }
 `;
 
 const StyledDate = styled.div`
     font-size: 1vw;
+
+    @media (max-width: 720px) {
+        font-size: 2.5vw;
+        text-align: center;
+    }
 `;
 
 const StyledPostFeatured = styled.div<IStyledPostFeatured>`
@@ -48,6 +63,17 @@ const StyledPostFeatured = styled.div<IStyledPostFeatured>`
     width: 100%;
     min-height: 35vw;
     transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.95;
+    }
+
+    @media (max-width: 720px) {
+        flex-direction: column;
+        padding: 4vw;
+        box-sizing: border-box;
+        min-height: auto;
+    }
 
     ${({coverColor}) => `
         background: ${coverColor};
@@ -64,10 +90,6 @@ const StyledPostFeatured = styled.div<IStyledPostFeatured>`
             color: ${COVER_COLORS_MAP[coverColor].date}
         }
     `}
-
-    &:hover {
-        opacity: 0.95;
-    }
 `;
 
 const StyledCover = styled.img`
@@ -76,6 +98,12 @@ const StyledCover = styled.img`
     left: 15vw;
     width: 30vw;
     z-index: 10;
+
+    @media (max-width: 720px) {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
 `;
 
 const StyledDescription = styled.div<IStyledDescription>`
@@ -83,15 +111,24 @@ const StyledDescription = styled.div<IStyledDescription>`
     padding: 10px 10px 10px 50%;
     box-sizing: border-box;
 
+    @media (max-width: 720px) {
+        padding: 2.5vw 0 0;
+    }
+
     ${({cover}) => !cover && `
-        padding: 0 2vw;
-        max-width: 780px;
+        padding: 0 4vw;
+        width: 100%;
+        max-width: 910px;
         margin: auto;
     `}
 `;
 
 const StyledCategories = styled.div`
     display: flex;
+
+    @media (max-width: 720px) {
+        justify-content: center;
+    }
 `;
 
 const StyledLink = styled(Link)`

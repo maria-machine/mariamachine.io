@@ -39,13 +39,22 @@ const StyledContentWrapper = styled.div`
 `;
 
 const StyledContent = styled.div`
-    max-width: 780px;
-    padding: 5vw 2vw;
+    width: 100%;
+    max-width: 910px;
+    padding: 4vw 4vw 90px 4vw;
     box-sizing: border-box;
+
+    @media (max-width: 720px) {
+        padding-bottom: 45px;
+    }
 `;
 
 const StyledFooter = styled.div`
     margin-top: 60px;
+
+    @media (max-width: 720px) {
+        margin-top: 30px;
+    }
 `;
 
 const StyledOrigin = styled.a`
@@ -54,10 +63,19 @@ const StyledOrigin = styled.a`
     background: ${ColorsEnum.CREAM};
     color: #000;
     margin-bottom: 40px;
+
+    @media (max-width: 720px) {
+        margin-bottom: 20px;
+    }
 `;
 
 const StyledSocial = styled.div`
     display: flex;
+
+    @media (max-width: 630px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `;
 
 const StyledShare = styled.div`
@@ -87,6 +105,10 @@ const StyledChat = styled.a`
     text-transform: uppercase;
     color: ${ColorsEnum.VALENCIA};
     margin-left: auto;
+
+    @media (max-width: 630px) {
+        margin: 10px 0 0;
+    }
 `;
 
 const Content: FunctionComponent<IContent> = ({post}) => {
@@ -121,7 +143,7 @@ const Content: FunctionComponent<IContent> = ({post}) => {
                         {locale === LocaleEnum.RU
                         ? (
                             <StyledChat href={config.socials.telegramChat.link} target='_blank'>
-                                Обудить в чате Telegram
+                                Обсудить в чате Telegram
                             </StyledChat>
                         ) : null}
                     </StyledSocial>

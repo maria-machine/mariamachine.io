@@ -38,32 +38,48 @@ const StyledSubscription = styled.div<IStyledSubscription>`
     border: 5px solid ${ColorsEnum.VALENCIA};
     box-sizing: border-box;
 
+    @media (max-width: 720px) {
+        width: 100%;
+    }
+
     ${({footer}) => footer && `
         width: auto;
         padding: 0;
         border: none;
+
+        @media (max-width: 720px) {
+            width: auto;
+        }
     `}
 `;
 
 const StyledInput = styled.input<IStyledInput>`
-    font-size: 1.5vw;
+    font-size: 2vw;
     font-weight: 300;
-    width: 14vw;
-    height: 2vw;
+    width: 100%;
     margin-right: 3vw;
-    padding: 0.3vw 0 0.3vw;
+    padding: 0.3vw 0 0.5vw;
     border: none;
     color: ${ColorsEnum.GRAPHITE};
     border-bottom: 1px solid ${ColorsEnum.GRAPHITE};
     outline: none;
     transition: opacity 0.2s;
     background: transparent;
+    box-sizing: border-box;
 
     &::placeholder {
-        font-size: 1.5vw;
+        font-size: 2vw;
         font-weight: 300;
         color: ${ColorsEnum.GRAPHITE};
         opacity: 0.2;
+    }
+
+    @media (max-width: 720px) {
+        font-size: 3vw;
+
+        &::placeholder {
+            font-size: 3vw;
+        }
     }
 
     ${({disabled}) => disabled && `
@@ -74,13 +90,17 @@ const StyledInput = styled.input<IStyledInput>`
 
 const StyledSubmit = styled.div<IStyledSubmit>`
     cursor: pointer;
-    font-size: 1.5vw;
+    font-size: 2vw;
     text-transform: uppercase;
     color: ${ColorsEnum.VALENCIA};
     transition: opacity 0.2s;
 
     &:hover {
         opacity: 0.85;
+    }
+
+    @media (max-width: 720px) {
+        font-size: 3vw;
     }
 
     ${({success}) => success && `
