@@ -14,6 +14,8 @@ const StyledImage = styled.span`
     text-align: center;
 
     img {
+        width: auto;
+        height: auto;
         max-width: 100%;
     }
 
