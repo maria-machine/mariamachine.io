@@ -66,6 +66,7 @@ const StyledInput = styled.input<IStyledInput>`
     transition: opacity 0.2s;
     background: transparent;
     box-sizing: border-box;
+    border-radius: 0;
 
     &::placeholder {
         font-size: 2vw;
@@ -164,7 +165,7 @@ const Subscription: FunctionComponent<ISubscription> = ({
     return (
         <StyledSubscription footer={footer}>
             <StyledInput
-                type='email'
+                pattern='+'
                 value={email}
                 placeholder={formatMessage(messages.subscriptionEmail)}
                 onChange={({target}) => {
@@ -178,6 +179,7 @@ const Subscription: FunctionComponent<ISubscription> = ({
                     }
                 }}
                 disabled={formDisabled}
+                autoComplete='something'
             />
             <StyledSubmit
                 disabled={submitDisabled}

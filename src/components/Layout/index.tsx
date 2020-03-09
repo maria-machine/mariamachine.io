@@ -54,6 +54,7 @@ const StyledLogoLink = styled(Link)`
 
 const StyledLogo = styled.img`
     width: 7vw;
+    height: 100%;
     transition: width 0.2s;
 `;
 
@@ -100,6 +101,12 @@ const StyledCategory = styled.div<IStyledCategory>`
         a {
             background: ${activeColor || '#f8f8f8'};
             color: #fff;
+        }
+
+        &:hover {
+            a {
+                background: ${activeColor || '#f8f8f8'};
+            }
         }
     `}
 `;
