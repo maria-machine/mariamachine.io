@@ -7,7 +7,6 @@ export default {
     'app.author': 'автор',
     'app.404': 'Страница не найдена.',
     'app.404.more': 'Попробуйте еще раз!',
-    'app.contacts.category': 'контакты',
     'app.subscription.email': 'Email',
     'app.subscription.subscribe': 'Подписаться!',
     'app.subscription.processing': 'Обработка...',

@@ -30,6 +30,8 @@ interface IStyledMenu {
 }
 
 const StyledLayout = styled.div`
+    display: grid;
+    grid-template-rows: 1fr auto;
     min-height: 100vh;
     min-width: 100vw;
     padding-top: 8vw;
@@ -43,12 +45,7 @@ const StyledLayout = styled.div`
 const StyledContent = styled.div`
     position: relative;
     display: flex;
-    min-height: calc(100vh - 8vw);
-    box-sizing: border-box;
-
-    @media (max-width: 720px) {
-        min-height: calc(100vh - 11vw);
-    }
+    min-width: 0;
 `;
 
 const StyledLogoLink = styled(Link)`
@@ -90,12 +87,6 @@ const StyledCategory = styled.div<IStyledCategory>`
         text-transform: uppercase;
     }
 
-    &:last-child {
-        a {
-            color: ${ColorsEnum.GREY};
-        }
-    }
-
     &:hover {
         a {
             opacity: 1;
@@ -109,13 +100,6 @@ const StyledCategory = styled.div<IStyledCategory>`
         a {
             background: ${activeColor || '#f8f8f8'};
             color: #fff;
-        }
-
-        &:last-child {
-            a {
-                background: ${ColorsEnum.VALENCIA};
-                color: #fff;
-            }
         }
     `}
 `;
@@ -227,13 +211,6 @@ const Layout: FunctionComponent = ({
                                 </StyledCategory>
                             ))
                     }
-                    <StyledCategory active={pathname === `/contacts`}>
-                        <Link
-                            to={`/contacts`}
-                        >
-                            {formatMessage(messages.contactsCategory)}
-                        </Link>
-                    </StyledCategory>
                 </StyledCategories>
             </StyledHeader>
             <StyledContent>

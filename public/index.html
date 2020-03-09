@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Maria Machine"
-    />
+    <meta name="description" content="Maria Machine, Machine Learning Community" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -25,9 +22,83 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <meta name="title" content="Maria Machine" />
+    <meta name='keywords' content='Maria Machine, Artificial intelligence, Machine learning, Deep learning, AI, ML, Articles, Translations' />
+    <meta name="author" content="Roman Ponomarev">
+    <meta property='og:type' content='website' />
+    <meta property='og:site_name' content='mariamachine.io' />
+    <meta property='og:title' content='Maria Machine' />
+    <meta property='og:url' content='https://mariamachine.io' />
+    <meta property='og:description' content='Maria Machine, Machine Learning Community' />
+    <meta property='og:image' content='https://github.com/maria-machine/about/raw/master/assets/maria_machine_robot_human_image.png' />
+    <meta property='og:image:url' content='https://github.com/maria-machine/about/raw/master/assets/maria_machine_robot_human_image.png' />
+    <meta property='og:image:secure_url' content='https://github.com/maria-machine/about/raw/master/assets/maria_machine_robot_human_image.png' />
+    <meta property='twitter:title' content='Maria Machine' />
+    <meta property='twitter:description' content='Maria Machine, Machine Learning Community' />
+    <meta property='twitter:card' content='summary' />
+    <meta property='twitter:site' content='@mariamachine_ml' />
+    <meta property='twitter:site:id' content='@mariamachine_ml' />
+    <meta property='twitter:site:creator' content='@mariamachine_ml' />
+    <meta property='twitter:site:creator:id' content='@mariamachine_ml' />
+    <meta property='twitter:image' content='https://github.com/maria-machine/about/raw/master/assets/maria_machine_robot_human_image.png' />
+    <meta property='twitter:url' content='https://twitter.com/mariamachine_ml' />
+    <script type='application/ld+json'>
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Maria Machine",
+            "legalName" : "Maria Machine",
+            "url": "https://mariamachine.io",
+            "logo": "https://github.com/maria-machine/about/raw/master/assets/maria_machine_robot_human_image.png",
+            "foundingDate": "2019-04-07T00:00:00Z",
+            "founders": [
+                {
+                    "@type": "Person",
+                    "name": "Roman Ponomarev",
+                    "email": "maksugr@gmail.com"
+                }
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Saint Petersburg",
+                "addressRegion": "Saint Petersburg",
+                "postalCode": "191014",
+                "addressCountry": "Russia"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer support",
+                "url": "https://mariamachine.io",
+                "email": "maksugr@gmail.com"
+            },
+            "sameAs": [
+                "https://twitter.com/mariamachine_ml",
+                "https://t.me/maria_machine",
+                "https://www.youtube.com/channel/UCxGr5HDHxIxYZsTGiJb_NtQ",
+                "https://facebook.com/maria.machine.ml",
+                "https://vk.com/maria_machine",
+                "https://github.com/maria-machine"
+            ]
+        }
+    </script>
     <title>Maria Machine</title>
+    <% if (process.env.NODE_ENV === 'production') { %>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TRJ33R6');</script>
+        <!-- End Google Tag Manager -->
+    <% } %>
   </head>
   <body>
+    <% if (process.env.NODE_ENV === 'production') { %>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TRJ33R6"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    <% } %>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

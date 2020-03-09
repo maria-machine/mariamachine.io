@@ -12,13 +12,15 @@ const StyledPage404 = styled.div`
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    padding: 4vw;
+    box-sizing: border-box;
 `;
 
 const StyledTitle = styled.div`
     text-align: center;
 
     img {
-        width: 50vw;
+        width: 50vh;
         max-width: 100%;
     }
 `;
@@ -45,6 +47,10 @@ const StyledDescription = styled.h1`
         width: 100%;
         height: 2px;
         background: #000;
+    }
+
+    @media (max-width: 720px) {
+        font-size: 4vw;
     }
 `;
 

@@ -24,6 +24,8 @@ const StyledFooter = styled.footer`
     position: relative;
     display: flex;
     flex-direction: column;
+    grid-row-start: 2;
+    grid-row-end: 3;
     align-items: center;
     background: ${ColorsEnum.GREY};
     color: #fff;
@@ -52,6 +54,34 @@ const StyledSocialItem = styled.a<IStyledSocialItem>`
     }
 `;
 
+const StyledAuthor = styled.div`
+    display: flex;
+    margin-top: 4vw;
+
+    span {
+        align-self: flex-end;
+        font-size: 1vw;
+        color: ${ColorsEnum.GRAPHITE};
+        margin-right: 10px;
+    }
+
+    a {
+        font-size: 2vw;
+        font-weight: 700;
+        color: ${ColorsEnum.VALENCIA};
+    }
+
+    @media (max-width: 720px) {
+        span {
+            font-size: 2vw;
+        }
+
+        a {
+            font-size: 4vw;
+        }
+    }
+`;
+
 const Footer: FunctionComponent = () => {
     const {
         twitter,
@@ -73,6 +103,10 @@ const Footer: FunctionComponent = () => {
                 <StyledSocialItem href={vk.link} target='_blank' icon={vkSvg} />
                 <StyledSocialItem href={github.link} target='_blank' icon={githubSvg} />
             </StyledSocial>
+            <StyledAuthor>
+                <span>© {(new Date()).getFullYear()}</span>
+                <a href='https://twitter.com/maksUgr' target='_blank' rel="noopener noreferrer">@maksugr</a>
+            </StyledAuthor>
         </StyledFooter>
     );
 };

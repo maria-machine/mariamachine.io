@@ -89,6 +89,10 @@ const StyledMarkdown = styled.div`
         p, ul, pre, hr {
             margin-bottom: 20px;
         }
+
+        li:after {
+            top: 11px;
+        }
     }
 `;
 

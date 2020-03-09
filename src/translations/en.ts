@@ -7,7 +7,6 @@ export default {
     'app.author': 'author',
     'app.404': 'Page not found.',
     'app.404.more': 'Let\'s try again!',
-    'app.contacts.category': 'contacts',
     'app.subscription.email': 'Email',
     'app.subscription.subscribe': 'Subscribe!',
     'app.subscription.processing': 'Processing...',
