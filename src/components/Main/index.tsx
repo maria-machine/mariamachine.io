@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { useIntl } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 import { contentful } from '../../utils/contentful';
 
@@ -39,7 +40,18 @@ const Main: FunctionComponent = () => {
         <StyledMain>
             {isLoading
                 ? (<Loader />)
-                : (<Posts posts={posts} / >)
+                : (
+                    <>
+                        <Helmet>
+                            <title>Maria Machine</title>
+                            <meta name='title' content='Maria Machine' />
+                            <meta property='og:title' content='Maria Machine' />
+                            <meta property='og:url' content={`${window.location.href}`} />
+                            <meta property='twitter:title' content='Maria Machine' />
+                        </Helmet>
+                        <Posts posts={posts} / >
+                    </>
+                )
             }
         </StyledMain>
     );

@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction
 import styled from 'styled-components';
 import { RouteComponentProps } from 'react-router-dom';
 import { useIntl } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 import { contentful } from '../../utils/contentful';
 
@@ -58,6 +59,13 @@ const SinglePost: FunctionComponent<RouteComponentProps<ISinglePost>> = ({match}
                 ? (<Loader />)
                 : (
                     <>
+                        <Helmet>
+                            <title>{`Maria Machine | ${post.fields.title}`}</title>
+                            <meta name='title' content={`Maria Machine | ${post.fields.title}`} />
+                            <meta property='og:title' content={`Maria Machine | ${post.fields.title}`} />
+                            <meta property='og:url' content={`${window.location.href}`} />
+                            <meta property='twitter:title' content={`Maria Machine | ${post.fields.title}`} />
+                        </Helmet>
                         <PostFeatured post={post} staticMode />
                         <Content post={post} / >
                     </>

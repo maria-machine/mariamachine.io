@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction
 import styled from 'styled-components';
 import { RouteComponentProps } from 'react-router-dom';
 import { useIntl } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 import { contentful } from '../../utils/contentful';
 
@@ -9,6 +10,8 @@ import { IPost } from '../../interfaces/post.interface';
 
 import { CategoriesEnum } from '../../enums/categories.enum';
 import { LocaleEnum } from '../../enums/locale.enum';
+
+import { messages } from '../../translations';
 
 import Loader from '../Loader';
 import Posts from '../Posts';
@@ -39,7 +42,7 @@ const fetchPosts = async (
 };
 
 const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) => {
-    const { locale } = useIntl();
+    const { locale, formatMessage } = useIntl();
     const { category } = match.params;
     const [posts, setPosts] = useState([] as IPost[]);
 
@@ -55,7 +58,18 @@ const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) =>
         <StyledCategory>
             {isLoading
                 ? (<Loader />)
-                : (<Posts posts={posts} / >)
+                : (
+                    <>
+                        <Helmet>
+                            <title>{`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`}</title>
+                            <meta name='title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
+                            <meta property='og:title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
+                            <meta property='og:url' content={`${window.location.href}`} />
+                            <meta property='twitter:title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
+                        </Helmet>
+                        <Posts posts={posts} / >
+                    </>
+                )
             }
         </StyledCategory>
     );

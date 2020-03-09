@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { messages } from '../../translations';
 
@@ -58,14 +59,23 @@ const Page404: FunctionComponent = () => {
     const { formatMessage } = useIntl();
 
     return (
-        <StyledPage404>
-            <StyledTitle>
-                <img src={mariaMachineRobotPng} alt='Logo Maria Machine Robot' />
-            </StyledTitle>
-            <StyledDescription>
-                <span>{formatMessage(messages.page404)}</span> <Link to='/'>{formatMessage(messages.page404more)}</Link>
-            </StyledDescription>
-        </StyledPage404>
+        <>
+            <Helmet>
+                <title>Maria Machine | 404</title>
+                <meta name='title' content='Maria Machine | 404' />
+                <meta property='og:title' content='Maria Machine | 404' />
+                <meta property='og:url' content={`${window.location.href}`} />
+                <meta property='twitter:title' content='Maria Machine | 404' />
+            </Helmet>
+            <StyledPage404>
+                <StyledTitle>
+                    <img src={mariaMachineRobotPng} alt='Logo Maria Machine Robot' />
+                </StyledTitle>
+                <StyledDescription>
+                    <span>{formatMessage(messages.page404)}</span> <Link to='/'>{formatMessage(messages.page404more)}</Link>
+                </StyledDescription>
+            </StyledPage404>
+        </>
     );
 };
 
