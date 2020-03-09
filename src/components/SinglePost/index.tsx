@@ -60,6 +60,7 @@ const SinglePost: FunctionComponent<RouteComponentProps<ISinglePost>> = ({match}
                 : (
                     <>
                         <Helmet>
+                            <html lang={locale} />
                             <title>{`Maria Machine | ${post.fields.title}`}</title>
                             <meta name='title' content={`Maria Machine | ${post.fields.title}`} />
                             <meta property='og:title' content={`Maria Machine | ${post.fields.title}`} />

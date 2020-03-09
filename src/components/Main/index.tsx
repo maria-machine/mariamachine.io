@@ -43,6 +43,7 @@ const Main: FunctionComponent = () => {
                 : (
                     <>
                         <Helmet>
+                            <html lang={locale} />
                             <title>Maria Machine</title>
                             <meta name='title' content='Maria Machine' />
                             <meta property='og:title' content='Maria Machine' />

@@ -56,11 +56,12 @@ const StyledDescription = styled.h1`
 `;
 
 const Page404: FunctionComponent = () => {
-    const { formatMessage } = useIntl();
+    const { locale, formatMessage } = useIntl();
 
     return (
         <>
             <Helmet>
+                <html lang={locale} />
                 <title>Maria Machine | 404</title>
                 <meta name='title' content='Maria Machine | 404' />
                 <meta property='og:title' content='Maria Machine | 404' />

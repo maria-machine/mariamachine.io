@@ -61,6 +61,7 @@ const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) =>
                 : (
                     <>
                         <Helmet>
+                            <html lang={locale} />
                             <title>{`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`}</title>
                             <meta name='title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
                             <meta property='og:title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
