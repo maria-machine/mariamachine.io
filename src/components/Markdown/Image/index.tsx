@@ -9,14 +9,12 @@ interface IImage {
 }
 
 const StyledImage = styled.span`
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    display: block;
     margin-bottom: 5px;
+    text-align: center;
 
     img {
-        width: 100%;
-        height: 100%;
+        max-width: 100%;
     }
 
     & + em {
