@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
@@ -15,7 +15,6 @@ import { messages } from '../../translations';
 
 import Loader from '../Loader';
 import Posts from '../Posts';
-import Page404 from '../Page404';
 
 interface ICategory {
     readonly category: CategoriesEnum;
@@ -29,8 +28,13 @@ const StyledCategory = styled.div`
 const fetchPosts = async (
     locale: string,
     category: string,
+    needRedirect: boolean,
     setPosts: Dispatch<SetStateAction<IPost[]>>
 ) => {
+    if (needRedirect) {
+        return;
+    }
+
     const { items: posts } = await contentful().getEntries({
         'content_type': 'post',
         'fields.categories': category,
@@ -46,12 +50,14 @@ const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) =>
     const { category } = match.params;
     const [posts, setPosts] = useState([] as IPost[]);
 
-    useEffect(() => { fetchPosts(locale, category, setPosts); }, [category, locale]);
+    const needRedirect = locale === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS;
+
+    useEffect(() => { fetchPosts(locale, category, needRedirect, setPosts); }, [category, locale, needRedirect]);
 
     const isLoading = !posts.length;
 
-    if (locale === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS) {
-        return (<Page404 />);
+    if (needRedirect) {
+        return (<Redirect to='/' />);
     }
 
     return (

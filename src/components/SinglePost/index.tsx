@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
@@ -10,7 +10,6 @@ import { IPost } from '../../interfaces/post.interface';
 
 import Loader from '../Loader';
 import Content from './Content';
-import Page404 from '../Page404';
 import PostFeatured from '../PostFeatured';
 
 interface ISinglePost {
@@ -27,9 +26,14 @@ const StyledSinglePost = styled.div`
 const fetchPost = async (
     locale: string,
     publicUrl: string,
+    needRedirect: boolean,
     setPost: Dispatch<SetStateAction<IPost>>,
     setIsLoading: Dispatch<SetStateAction<boolean>>
 ) => {
+    if (needRedirect) {
+        return;
+    }
+
     const { items: posts } = await contentful().getEntries({
         'content_type': 'post',
         'fields.publicUrl': publicUrl,
@@ -47,10 +51,12 @@ const SinglePost: FunctionComponent<RouteComponentProps<ISinglePost>> = ({match}
     const [post, setPost] = useState({} as IPost);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => { fetchPost(locale, publicUrl, setPost, setIsLoading); }, [publicUrl, locale]);
+    const needRedirect = !isLoading && (!post.fields || !post.fields.title);
 
-    if (!isLoading && (!post.fields || !post.fields.title)) {
-        return (<Page404 />);
+    useEffect(() => { fetchPost(locale, publicUrl, needRedirect, setPost, setIsLoading); }, [publicUrl, locale, needRedirect]);
+
+    if (needRedirect) {
+        return (<Redirect to='/' />);
     }
 
     return (

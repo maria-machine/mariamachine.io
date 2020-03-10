@@ -49,7 +49,7 @@ const StyledContent = styled.div`
 `;
 
 const StyledLogoLink = styled(Link)`
-    display: flex;
+    display: block;
 `;
 
 const StyledLogo = styled.img`
