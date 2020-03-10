@@ -49,12 +49,14 @@ const StyledContent = styled.div`
 `;
 
 const StyledLogoLink = styled(Link)`
-    display: block;
+    display: flex;
+    align-items: center;
+    height: 100%;
 `;
 
 const StyledLogo = styled.img`
     width: 7vw;
-    height: 100%;
+    height: 85%;
     transition: width 0.2s;
 `;
 
