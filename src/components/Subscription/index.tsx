@@ -56,8 +56,8 @@ const StyledSubscription = styled.div<IStyledSubscription>`
 const StyledInput = styled.input<IStyledInput>`
     font-size: 2vw;
     font-weight: 300;
-    width: 100%;
-    margin-right: 3vw;
+    width: 50%;
+    margin-right: 10%;
     padding: 0.3vw 0 0.5vw;
     border: none;
     color: ${ColorsEnum.GRAPHITE};
@@ -95,6 +95,9 @@ const StyledSubmit = styled.div<IStyledSubmit>`
     text-transform: uppercase;
     color: ${ColorsEnum.VALENCIA};
     transition: opacity 0.2s;
+    width: 40%;
+    margin-left: auto;
+    text-align: right;
 
     &:hover {
         opacity: 0.85;
