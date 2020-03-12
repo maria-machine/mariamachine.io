@@ -29,30 +29,6 @@ interface IStyledInput {
     readonly disabled: boolean;
 }
 
-const StyledSubscription = styled.div<IStyledSubscription>`
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 50vw;
-    padding: 4vw;
-    border: 5px solid ${ColorsEnum.VALENCIA};
-    box-sizing: border-box;
-
-    @media (max-width: 720px) {
-        width: 100%;
-    }
-
-    ${({footer}) => footer && `
-        width: auto;
-        padding: 0;
-        border: none;
-
-        @media (max-width: 720px) {
-            width: auto;
-        }
-    `}
-`;
-
 const StyledInput = styled.input<IStyledInput>`
     font-size: 2vw;
     font-weight: 300;
@@ -116,6 +92,40 @@ const StyledSubmit = styled.div<IStyledSubmit>`
         pointer-events: none;
         cursor: default;
         opacity: 0.2;
+    `}
+`;
+
+const StyledSubscription = styled.div<IStyledSubscription>`
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 50vw;
+    padding: 4vw;
+    border: 5px solid ${ColorsEnum.VALENCIA};
+    box-sizing: border-box;
+
+    @media (max-width: 720px) {
+        width: 100%;
+    }
+
+    ${({footer}) => footer && `
+        width: 50%;
+        padding: 0;
+        border: none;
+
+        ${StyledInput} {
+            text-align: center;
+        }
+
+        ${StyledSubmit} {
+            width: auto;
+            margin-left: 0;
+            text-align: left;
+        }
+
+        @media (max-width: 720px) {
+            width: auto;
+        }
     `}
 `;
 
