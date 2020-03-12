@@ -56,8 +56,8 @@ const StyledLogoLink = styled(Link)`
 
 const StyledLogo = styled.img`
     width: 7vw;
-    height: 85%;
-    transition: width 0.2s;
+    height: 7vw;
+    transition: width 0.2s, height 0.2s;
 `;
 
 const StyledLang = styled(Lang)`
@@ -130,7 +130,8 @@ const StyledHeader = styled.header<IStyledMenu>`
         height: 11vw;
 
         ${StyledLogo} {
-            width: 10vw;
+            width: 9vw;
+            height: 9vw;
         }
 
         ${StyledCategory} {
@@ -150,6 +151,7 @@ const StyledHeader = styled.header<IStyledMenu>`
 
             ${StyledLogo} {
                 width: 4vw;
+                height: 4vw;
             }
 
             ${StyledCategory} {
