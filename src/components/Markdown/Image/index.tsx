@@ -31,7 +31,7 @@ const StyledImage = styled.span`
 
 const Image: FunctionComponent<IImage> = ({alt, src}) => (
     <StyledImage>
-        <img src={src} alt={alt} />
+        <img src={`https:${src}`} alt={alt} />
     </StyledImage>
 );
 

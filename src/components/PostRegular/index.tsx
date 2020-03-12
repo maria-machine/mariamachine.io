@@ -143,7 +143,7 @@ const PostRegular: FunctionComponent<IPostRegular> = ({post}) => {
     return (
         <StyledPostRegular coverColor={coverColor}>
             {cover ? (
-                <StyledCover src={`http:${cover.fields.file.url}`} alt={`${title} image cover`} />
+                <StyledCover src={`https:${cover.fields.file.url}`} alt={`${title} image cover`} />
             ) : null}
             <StyledDescription>
                 <StyledCategories>

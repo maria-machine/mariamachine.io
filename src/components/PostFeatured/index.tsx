@@ -155,7 +155,7 @@ const PostFeatured: FunctionComponent<IPostFeatured> = ({post, staticMode}) => {
     return (
         <StyledPostFeatured coverColor={coverColor}>
             {cover ? (
-                <StyledCover src={`http:${cover.fields.file.url}`} alt={`${title} image cover`} />
+                <StyledCover src={`https:${cover.fields.file.url}`} alt={`${title} image cover`} />
             ) : null}
             <StyledDescription cover={!!cover}>
                 <StyledCategories>
