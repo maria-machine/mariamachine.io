@@ -1,21 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
-import { useIntl } from 'react-intl';
+import { useIntl } from 'gatsby-plugin-intl';
 import { useWindowScroll } from 'react-use';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { setLayoutCategoriesColor } from '../../actionCreators';
+import { Link } from 'gatsby';
 
 import { messages } from '../../translations';
-
-import { IState } from '../../interfaces/state.interface';
 
 import { CategoriesEnum } from '../../enums/categories.enum';
 import { LocaleEnum } from '../../enums/locale.enum';
 import { ColorsEnum } from '../../enums/colors.enum';
 
 import logoSvg from './assets/logo.png';
+
+import { GlobalStyle } from './styles';
 
 import Lang from '../Lang';
 import Footer from '../Footer';
@@ -179,56 +176,59 @@ const StyledLangs = styled.div`
 const Layout: FunctionComponent = ({
     children
 }) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const { locale, formatMessage } = useIntl();
-    const { pathname } = useLocation();
-    const { color: categoryActiveColor } = useSelector((state: IState) => state.layout.categories);
+    // const { pathname } = useLocation();
+    // const { color: categoryActiveColor } = useSelector((state: IState) => state.layout.categories);
 
     const { y: windowScrollY } = useWindowScroll();
 
     return (
-        <StyledLayout>
-            <StyledHeader small={windowScrollY >= 100}>
-                <StyledLogoLink to='/'>
-                    <StyledLogo src={logoSvg} alt='Maria Machine Logo' />
-                </StyledLogoLink>
-                <StyledLangs>
-                    <StyledLang localeName={LocaleEnum.EN}>
-                        Eng
-                    </StyledLang>
-                    <StyledLang localeName={LocaleEnum.RU}>
-                        Rus
-                    </StyledLang>
-                </StyledLangs>
-                <StyledCategories>
-                    {
-                        Object.keys(CategoriesEnum)
-                            .map((category) => category.toLowerCase())
-                            .filter((category) => !(locale === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS))
-                            .map((category) => (
-                                <StyledCategory
-                                    key={category}
-                                    active={pathname === `/categories/${category}`}
-                                    activeColor={categoryActiveColor}
-                                >
-                                    <Link
-                                        to={`/categories/${category}`}
-                                        onClick={() => {
-                                            dispatch(setLayoutCategoriesColor());
-                                        }}
+        <>
+            <GlobalStyle />
+            <StyledLayout>
+                <StyledHeader small={windowScrollY >= 100}>
+                    <StyledLogoLink to='/'>
+                        <StyledLogo src={logoSvg} alt='Maria Machine Logo' />
+                    </StyledLogoLink>
+                    <StyledLangs>
+                        <StyledLang localeName={LocaleEnum.EN}>
+                            Eng
+                        </StyledLang>
+                        <StyledLang localeName={LocaleEnum.RU}>
+                            Rus
+                        </StyledLang>
+                    </StyledLangs>
+                    <StyledCategories>
+                        {
+                            Object.keys(CategoriesEnum)
+                                .map((category) => category.toLowerCase())
+                                .filter((category) => !(locale === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS))
+                                .map((category) => (
+                                    <StyledCategory
+                                        key={category}
+                                        active={window.location.pathname === `/categories/${category}`}
+                                        // activeColor={categoryActiveColor}
                                     >
-                                        {formatMessage((messages as {[key: string]: {[key: string]: string}})[category])}
-                                    </Link>
-                                </StyledCategory>
-                            ))
-                    }
-                </StyledCategories>
-            </StyledHeader>
-            <StyledContent>
-                {children}
-            </StyledContent>
-            <Footer />
-        </StyledLayout>
+                                        <Link
+                                            to={`/categories/${category}`}
+                                            onClick={() => {
+                                                // dispatch(setLayoutCategoriesColor());
+                                            }}
+                                        >
+                                            {formatMessage((messages as {[key: string]: {[key: string]: string}})[category])}
+                                        </Link>
+                                    </StyledCategory>
+                                ))
+                        }
+                    </StyledCategories>
+                </StyledHeader>
+                <StyledContent>
+                    {children}
+                </StyledContent>
+                <Footer />
+            </StyledLayout>
+        </>
     );
 };
 

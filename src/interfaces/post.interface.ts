@@ -1,4 +1,4 @@
-import { Asset } from 'contentful';
+// import { Asset } from 'contentful';
 
 import { CategoriesEnum } from '../enums/categories.enum';
 import { ColorsEnum } from '../enums/colors.enum';
@@ -14,7 +14,7 @@ export interface IPost {
         readonly title: string;
         readonly description?: string;
         readonly content: string;
-        readonly cover?: Asset;
+        // readonly cover?: Asset;
         readonly coverColor?: ColorsEnum;
         readonly categories: CategoriesEnum[];
         readonly publicUrl: string;

@@ -1,16 +1,13 @@
 import React, { FunctionComponent, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { useIntl, MessageDescriptor } from 'react-intl';
+import { useIntl, MessageDescriptor } from 'gatsby-plugin-intl';
 import * as emailValidator from 'email-validator';
 import jsonp from 'jsonp';
-import { useSelector } from 'react-redux';
 
 import { config } from '../../config';
 import { messages } from '../../translations';
 
 import { ColorsEnum } from '../../enums/colors.enum';
-
-import { IState } from '../../interfaces/state.interface';
 
 interface ISubscription {
     readonly footer?: boolean;
@@ -169,7 +166,7 @@ const Subscription: FunctionComponent<ISubscription> = ({
         setSubmitDisabled(!validateEmail(email));
     }, [email]);
 
-    const subscription = useSelector((state: IState) => state.subscription);
+    const subscription = window.localStorage.getItem(config.localStorage.subscription) === 'true';
 
     if (subscription) {
         return null;

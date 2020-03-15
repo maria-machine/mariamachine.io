@@ -4,16 +4,11 @@ export interface IConfigLink {
 }
 
 export interface IConfig {
-    readonly app: {
-        readonly dev: boolean;
-    };
-    readonly contentful: {
-        readonly space?: string;
-        readonly token?: string;
-    };
     readonly localStorage: {
-        readonly locale: string;
         readonly subscription: string;
+    };
+    readonly ga: {
+        readonly id?: string;
     };
     readonly mailchimp: {
         readonly client?: string;
@@ -32,21 +27,16 @@ export interface IConfig {
 }
 
 export const config: IConfig = {
-    app: {
-        dev: process.env.REACT_APP_DEV === 'true'
-    },
-    contentful: {
-        space: process.env.REACT_APP_CONTENTFUL_SPACE,
-        token: process.env.REACT_APP_CONTENTFUL_TOKEN
-    },
     localStorage: {
-        locale: 'MARIA_MACHINE_LOCALE',
         subscription: 'MARIA_MACHINE_SUBSCRIPTION'
     },
+    ga: {
+        id: process.env.GATSBY_GA_ID
+    },
     mailchimp: {
-        client: process.env.REACT_APP_MAILCHIMP_CLIENT,
-        u: process.env.REACT_APP_MAILCHIMP_U,
-        id: process.env.REACT_APP_MAILCHIMP_ID
+        client: process.env.GATSBY_MAILCHIMP_CLIENT,
+        u: process.env.GATSBY_MAILCHIMP_U,
+        id: process.env.GATSBY_MAILCHIMP_ID
     },
     socials: {
         youtube: {
