@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
+import { useLocation } from 'react-use';
 
 import { config } from '../../config';
 
@@ -11,6 +12,8 @@ interface ISeo {
 }
 
 const Seo: FunctionComponent<ISeo> = ({ title, description, lang }) => {
+    const location = useLocation();
+
     const { site } = useStaticQuery(
         graphql`
             query {
@@ -65,7 +68,7 @@ const Seo: FunctionComponent<ISeo> = ({ title, description, lang }) => {
                 },
                 {
                     property: `og:url`,
-                    content: `${window.location.href}`
+                    content: `${location.href}`
                 },
                 {
                     property: 'og:image',

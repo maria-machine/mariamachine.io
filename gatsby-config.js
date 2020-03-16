@@ -8,15 +8,47 @@ module.exports = {
         `gatsby-plugin-ts`,
         `gatsby-plugin-styled-components`,
         `gatsby-plugin-react-helmet`,
+        `gatsby-transformer-sharp`,
+        `gatsby-plugin-sharp`,
         {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `images`,
                 path: `${__dirname}/src/images`
-            },
+            }
         },
-        `gatsby-transformer-sharp`,
-        `gatsby-plugin-sharp`,
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `markdown`,
+                path: `${__dirname}/src/markdown`
+            }
+        },
+        {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [
+                    'gatsby-remark-prismjs',
+                    {
+                        resolve: `gatsby-remark-images`,
+                        options: {
+                            maxWidth: 950,
+                            quality: 100
+                        }
+                    },
+                    {
+                        resolve: `gatsby-remark-copy-linked-files`
+                    },
+                    {
+                        resolve: 'gatsby-remark-external-links',
+                        options: {
+                            target: '_blank',
+                        }
+                    },
+                    'gatsby-remark-smartypants'
+                ]
+            }
+        },
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
@@ -27,7 +59,7 @@ module.exports = {
                 theme_color: `#000000`,
                 display: `minimal-ui`,
                 icon: `src/images/icon.png`
-            },
+            }
         },
         {
             resolve: `gatsby-plugin-google-fonts`,
@@ -44,7 +76,7 @@ module.exports = {
                 path: `${__dirname}/src/translations`,
                 languages: [`en`, `ru`],
                 defaultLanguage: `en`,
-                redirect: true,
+                redirect: false
             }
         }
         // this (optional) plugin enables Progressive Web App + Offline functionality

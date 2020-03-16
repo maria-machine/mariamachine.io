@@ -1,10 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { useIntl } from 'gatsby-plugin-intl';
-import { useWindowScroll } from 'react-use';
-import { Link } from 'gatsby';
-
-import { messages } from '../../translations';
+import { Link } from 'gatsby-plugin-intl';
+import { useWindowScroll, useLocation } from 'react-use';
 
 import { CategoriesEnum } from '../../enums/categories.enum';
 import { LocaleEnum } from '../../enums/locale.enum';
@@ -17,9 +14,15 @@ import { GlobalStyle } from './styles';
 import Lang from '../Lang';
 import Footer from '../Footer';
 
+interface ILayout {
+    readonly intl: {
+        readonly language: LocaleEnum;
+        readonly messages: {[key: string]: string};
+    };
+}
+
 interface IStyledCategory {
     readonly active: boolean;
-    readonly activeColor?: ColorsEnum;
 }
 
 interface IStyledMenu {
@@ -94,18 +97,11 @@ const StyledCategory = styled.div<IStyledCategory>`
         }
     }
 
-    ${({active, activeColor}) => active && `
+    ${({active}) => active && `
         pointer-events: none;
 
         a {
-            background: ${activeColor || '#f8f8f8'};
-            color: #fff;
-        }
-
-        &:hover {
-            a {
-                background: ${activeColor || '#f8f8f8'};
-            }
+            background: #f8f8f8;
         }
     `}
 `;
@@ -173,15 +169,14 @@ const StyledLangs = styled.div`
     margin-left: 0.7vw;
 `;
 
-const Layout: FunctionComponent = ({
+const Layout: FunctionComponent<ILayout> = ({
+    intl,
     children
 }) => {
-    // const dispatch = useDispatch();
-    const { locale, formatMessage } = useIntl();
-    // const { pathname } = useLocation();
-    // const { color: categoryActiveColor } = useSelector((state: IState) => state.layout.categories);
+    const { language, messages } = intl;
 
     const { y: windowScrollY } = useWindowScroll();
+    const location = useLocation();
 
     return (
         <>
@@ -203,20 +198,14 @@ const Layout: FunctionComponent = ({
                         {
                             Object.keys(CategoriesEnum)
                                 .map((category) => category.toLowerCase())
-                                .filter((category) => !(locale === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS))
+                                .filter((category) => !(language === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS))
                                 .map((category) => (
                                     <StyledCategory
                                         key={category}
-                                        active={window.location.pathname === `/categories/${category}`}
-                                        // activeColor={categoryActiveColor}
+                                        active={(location.pathname || '').includes(`/categories/${category}`)}
                                     >
-                                        <Link
-                                            to={`/categories/${category}`}
-                                            onClick={() => {
-                                                // dispatch(setLayoutCategoriesColor());
-                                            }}
-                                        >
-                                            {formatMessage((messages as {[key: string]: {[key: string]: string}})[category])}
+                                        <Link to={`/categories/${category}`}>
+                                            {messages[category]}
                                         </Link>
                                     </StyledCategory>
                                 ))

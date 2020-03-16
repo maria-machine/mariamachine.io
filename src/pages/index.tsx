@@ -1,50 +1,67 @@
-import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { graphql } from 'gatsby';
 import { useIntl } from 'gatsby-plugin-intl';
 
-import { IPost } from '../interfaces/post.interface';
+import { PostsQuery } from '../../graphql-types';
 
-import SEO from '../components/seo';
+import { getPosts } from '../utils';
+
+import Seo from '../components/Seo';
 import Layout from '../components/Layout';
+import Posts from '../components/Posts';
 
-// import Posts from '../Posts';
+interface IMain {
+    readonly data: PostsQuery;
+}
 
 const StyledMain = styled.div`
     display: flex;
     width: 100%;
 `;
 
-// const fetchPosts = async (
-//     locale: string,
-//     setPosts: Dispatch<SetStateAction<IPost[]>>
-// ) => {
-//     const { items: posts } = await contentful().getEntries({
-//         'content_type': 'post',
-//         order: '-fields.date',
-//         locale
-//     });
-
-//     setPosts(posts as IPost[]);
-// };
-
-const Main: FunctionComponent = () => {
+const Main: FunctionComponent<IMain> = ({ data }) => {
     const { locale } = useIntl();
 
-    // const [posts, setPosts] = useState([] as IPost[]);
-    // useEffect(() => { fetchPosts(locale, setPosts); }, [locale]);
-
-    // const isLoading = !posts.length;
-
     return (
-        <Layout>
+        <>
+            <Seo lang={locale} / >
             <StyledMain>
-                <SEO
-                    lang={locale}
-                / >
-                {/* <Posts posts={posts} /> */}
+                <Posts posts={getPosts(data, locale)} />
             </StyledMain>
-        </Layout>
+        </>
     );
 };
+
+export const MainQuery = graphql`
+    query Posts {
+        allMarkdownRemark(
+            sort: {
+                fields: [frontmatter___date]
+                order: DESC
+            }
+        ) {
+            edges {
+                node {
+                    html
+                    frontmatter {
+                        title
+                        date
+                        publicUrl
+                        cover {
+                            publicURL
+                        }
+                        coverColor
+                        categories
+                        lang
+                        originName
+                        originAuthor
+                        originLink
+                    }
+                }
+            }
+        }
+    }
+`;
 
 export default Main;

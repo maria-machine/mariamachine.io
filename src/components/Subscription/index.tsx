@@ -166,7 +166,7 @@ const Subscription: FunctionComponent<ISubscription> = ({
         setSubmitDisabled(!validateEmail(email));
     }, [email]);
 
-    const subscription = window.localStorage.getItem(config.localStorage.subscription) === 'true';
+    const subscription = typeof window !== `undefined` ? window.localStorage.getItem(config.localStorage.subscription) === 'true' : false;
 
     if (subscription) {
         return null;
