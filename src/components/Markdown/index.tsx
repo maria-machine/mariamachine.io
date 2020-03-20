@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useRef, MutableRefObject } from 'r
 import styled from 'styled-components';
 import MarkdownToJSX from 'markdown-to-jsx';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
+import 'highlight.js/styles/solarized-light.css';
 
 import Link from './Link';
 import Blockquote from './Blockquote';
@@ -18,6 +18,7 @@ const StyledMarkdown = styled.div`
 
     h2 {
         font-size: 34px;
+        font-weight: 400;
         margin-bottom: 20px;
     }
 
@@ -27,23 +28,14 @@ const StyledMarkdown = styled.div`
 
     a {
         position: relative;
-        color: #000;
+        color: ${ColorsEnum.VALENCIA};
         text-decoration: none;
     }
 
-    a:after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: #000;
-    }
-
     code {
-        font-size: 15px;
-        line-height: 130%;
+        font-size: 16px;
+        line-height: 170%;
+        padding: 20px;
     }
 
     p code {

@@ -5,7 +5,9 @@ import { useIntl } from 'react-intl';
 import { useWindowScroll } from 'react-use';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setLayoutCategoriesColor } from '../../actionCreators';
+import { setLayoutCategoriesColor, setLangLocale } from '../../actionCreators';
+
+import { config } from '../../config';
 
 import { messages } from '../../translations';
 
@@ -17,7 +19,6 @@ import { ColorsEnum } from '../../enums/colors.enum';
 
 import logoSvg from './assets/logo.png';
 
-import Lang from '../Lang';
 import Footer from '../Footer';
 
 interface IStyledCategory {
@@ -58,18 +59,6 @@ const StyledLogo = styled.img`
     width: 7vw;
     height: 7vw;
     transition: width 0.2s, height 0.2s;
-`;
-
-const StyledLang = styled(Lang)`
-    font-size: 1vw;
-    line-height: 150%;
-    margin-right: 10px;
-    text-transform: lowercase;
-    transition: opacity 0.1s;
-
-    &:last-child {
-        margin-right: 0;
-    }
 `;
 
 const StyledCategory = styled.div<IStyledCategory>`
@@ -113,6 +102,28 @@ const StyledCategory = styled.div<IStyledCategory>`
     `}
 `;
 
+const StyledLang = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1.5vw;
+    margin-left: 1.5vw;
+    height: 100%;
+    background: transparent;
+    transition: opacity 0.2s, font-size 0.2s;
+    font-size: 1.5vw;
+    font-weight: 700;
+    line-height: 150%;
+    color: ${ColorsEnum.SAN_JUAN};
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+       opacity: 0.7;
+    }
+`;
+
 const StyledHeader = styled.header<IStyledMenu>`
     display: flex;
     align-items: center;
@@ -141,7 +152,7 @@ const StyledHeader = styled.header<IStyledMenu>`
         }
 
         ${StyledLang} {
-            font-size: 2vw;
+            font-size: 2.5vw;
         }
     }
 
@@ -159,6 +170,10 @@ const StyledHeader = styled.header<IStyledMenu>`
                     font-size: 1vw;
                 }
             }
+
+            ${StyledLang} {
+                font-size: 1vw;
+            }
         }
     `}
 `;
@@ -168,12 +183,6 @@ const StyledCategories = styled.div`
     align-items: stretch;
     height:inherit;
     margin-left: auto;
-`;
-
-const StyledLangs = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-left: 0.7vw;
 `;
 
 const Layout: FunctionComponent = ({
@@ -192,14 +201,6 @@ const Layout: FunctionComponent = ({
                 <StyledLogoLink to='/'>
                     <StyledLogo src={logoSvg} alt='Maria Machine Logo' />
                 </StyledLogoLink>
-                <StyledLangs>
-                    <StyledLang localeName={LocaleEnum.EN}>
-                        Eng
-                    </StyledLang>
-                    <StyledLang localeName={LocaleEnum.RU}>
-                        Rus
-                    </StyledLang>
-                </StyledLangs>
                 <StyledCategories>
                     {
                         Object.keys(CategoriesEnum)
@@ -222,6 +223,16 @@ const Layout: FunctionComponent = ({
                                 </StyledCategory>
                             ))
                     }
+                    <StyledLang
+                        onClick={() => {
+                            const nextLocale = locale === LocaleEnum.EN ? LocaleEnum.RU : LocaleEnum.EN;
+
+                            dispatch(setLangLocale(nextLocale));
+                            localStorage.setItem(config.localStorage.locale, nextLocale);
+                        }}
+                    >
+                        {locale === LocaleEnum.EN ? 'ru' : 'en'}
+                    </StyledLang>
                 </StyledCategories>
             </StyledHeader>
             <StyledContent>

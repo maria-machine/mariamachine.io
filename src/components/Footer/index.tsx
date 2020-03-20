@@ -12,8 +12,6 @@ import vkSvg from '../assets/vk.svg';
 import youtubeSvg from '../assets/youtube.svg';
 import githubSvg from '../assets/github.svg';
 
-import Subscription from '../Subscription';
-
 interface IStyledSocialItem {
     readonly href: string;
     readonly target: string;
@@ -29,7 +27,7 @@ const StyledFooter = styled.footer`
     align-items: center;
     background: ${ColorsEnum.GREY};
     color: #fff;
-    padding: 5vw 4vw;
+    padding: 4vw 4vw 3vw;
     z-index: 20;
 `;
 
@@ -56,7 +54,7 @@ const StyledSocialItem = styled.a<IStyledSocialItem>`
 
 const StyledAuthor = styled.div`
     display: flex;
-    margin-top: 4vw;
+    margin-top: 2vw;
 
     span {
         align-self: flex-end;
@@ -67,7 +65,6 @@ const StyledAuthor = styled.div`
 
     a {
         font-size: 2vw;
-        font-weight: 700;
         color: ${ColorsEnum.VALENCIA};
     }
 
@@ -94,7 +91,6 @@ const Footer: FunctionComponent = () => {
 
     return (
         <StyledFooter>
-            <Subscription footer />
             <StyledSocial>
                 <StyledSocialItem href={twitter.link} target='_blank' icon={twitterSvg} />
                 <StyledSocialItem href={telegramChannel.link} target='_blank' icon={telegramSvg} />

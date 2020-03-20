@@ -22,7 +22,6 @@ interface IStyledPostRegular {
 
 const StyledTitle = styled.div`
     font-size: 4vw;
-    font-weight: 700;
     margin: 1vw 0 0.5vw;
 
     @media (max-width: 720px) {

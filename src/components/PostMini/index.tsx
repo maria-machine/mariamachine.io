@@ -42,7 +42,6 @@ const StyledPostMini = styled.div`
 
 const StyledTitle = styled.div`
     font-size: 4vw;
-    font-weight: 700;
     margin-bottom: 0.5vw;
 
     @media (max-width: 720px) {

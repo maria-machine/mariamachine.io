@@ -40,7 +40,7 @@ const StyledContentWrapper = styled.div`
 
 const StyledContent = styled.div`
     width: 100%;
-    max-width: 910px;
+    max-width: 850px;
     padding: 4vw 4vw 90px 4vw;
     box-sizing: border-box;
 
