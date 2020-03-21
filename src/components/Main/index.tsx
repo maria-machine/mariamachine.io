@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
+import { useSelector } from 'react-redux';
 
-import { contentful } from '../../utils/contentful';
-
+import { IState } from '../../interfaces/state.interface';
 import { IPost } from '../../interfaces/post.interface';
 
 import Loader from '../Loader';
@@ -15,24 +15,9 @@ const StyledMain = styled.div`
     width: 100%;
 `;
 
-const fetchPosts = async (
-    locale: string,
-    setPosts: Dispatch<SetStateAction<IPost[]>>
-) => {
-    const { items: posts } = await contentful().getEntries({
-        'content_type': 'post',
-        order: '-fields.date',
-        locale
-    });
-
-    setPosts(posts as IPost[]);
-};
-
 const Main: FunctionComponent = () => {
     const { locale } = useIntl();
-
-    const [posts, setPosts] = useState([] as IPost[]);
-    useEffect(() => { fetchPosts(locale, setPosts); }, [locale]);
+    const posts: IPost[] = useSelector((state: IState) => state.posts[locale]);
 
     const isLoading = !posts.length;
 

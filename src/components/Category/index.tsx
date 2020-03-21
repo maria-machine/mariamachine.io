@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
+import { useSelector } from 'react-redux';
 
-import { contentful } from '../../utils/contentful';
-
+import { IState } from '../../interfaces/state.interface';
 import { IPost } from '../../interfaces/post.interface';
 
 import { CategoriesEnum } from '../../enums/categories.enum';
@@ -25,34 +25,15 @@ const StyledCategory = styled.div`
     width: 100%;
 `;
 
-const fetchPosts = async (
-    locale: string,
-    category: string,
-    needRedirect: boolean,
-    setPosts: Dispatch<SetStateAction<IPost[]>>
-) => {
-    if (needRedirect) {
-        return;
-    }
-
-    const { items: posts } = await contentful().getEntries({
-        'content_type': 'post',
-        'fields.categories': category,
-        order: '-fields.date',
-        locale
-    });
-
-    setPosts(posts as IPost[]);
-};
-
 const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) => {
     const { locale, formatMessage } = useIntl();
-    const { category } = match.params;
-    const [posts, setPosts] = useState([] as IPost[]);
 
-    const needRedirect = locale === LocaleEnum.EN && category === CategoriesEnum.TRANSLATIONS;
+    const { category: categoryParam } = match.params;
 
-    useEffect(() => { fetchPosts(locale, category, needRedirect, setPosts); }, [category, locale, needRedirect]);
+    const posts: IPost[] = useSelector((state: IState) => state.posts[locale])
+        .filter((post) => post.fields.categories.some((category) => category === categoryParam));
+
+    const needRedirect = locale === LocaleEnum.EN && categoryParam === CategoriesEnum.TRANSLATIONS;
 
     const isLoading = !posts.length;
 
@@ -68,11 +49,11 @@ const Category: FunctionComponent<RouteComponentProps<ICategory>> = ({match}) =>
                     <>
                         <Helmet>
                             <html lang={locale} />
-                            <title>{`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`}</title>
-                            <meta name='title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
-                            <meta property='og:title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
+                            <title>{`Maria Machine | ${formatMessage(messages[categoryParam]).toUpperCase()}`}</title>
+                            <meta name='title' content={`Maria Machine | ${formatMessage(messages[categoryParam]).toUpperCase()}`} />
+                            <meta property='og:title' content={`Maria Machine | ${formatMessage(messages[categoryParam]).toUpperCase()}`} />
                             <meta property='og:url' content={`${window.location.href}`} />
-                            <meta property='twitter:title' content={`Maria Machine | ${formatMessage(messages[category]).toUpperCase()}`} />
+                            <meta property='twitter:title' content={`Maria Machine | ${formatMessage(messages[categoryParam]).toUpperCase()}`} />
                         </Helmet>
                         <Posts posts={posts} / >
                     </>

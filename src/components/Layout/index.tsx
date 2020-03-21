@@ -1,11 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, Dispatch } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { useWindowScroll } from 'react-use';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setLayoutCategoriesColor, setLangLocale } from '../../actionCreators';
+import { contentful } from '../../utils/contentful';
+
+import { setLayoutCategoriesColor, setLangLocale, setPosts } from '../../actionCreators';
 
 import { config } from '../../config';
 
@@ -16,6 +18,8 @@ import { IState } from '../../interfaces/state.interface';
 import { CategoriesEnum } from '../../enums/categories.enum';
 import { LocaleEnum } from '../../enums/locale.enum';
 import { ColorsEnum } from '../../enums/colors.enum';
+
+import { ActionType } from '../../reducers/root-reducer';
 
 import logoSvg from './assets/logo.png';
 
@@ -185,6 +189,19 @@ const StyledCategories = styled.div`
     margin-left: auto;
 `;
 
+const fetchPosts = async (
+    locale: string,
+    dispatch: Dispatch<ActionType>
+) => {
+    const { items: posts } = await contentful().getEntries({
+        'content_type': 'post',
+        order: '-fields.date',
+        locale
+    });
+
+    dispatch(setPosts(locale, posts));
+};
+
 const Layout: FunctionComponent = ({
     children
 }) => {
@@ -192,6 +209,8 @@ const Layout: FunctionComponent = ({
     const { locale, formatMessage } = useIntl();
     const { pathname } = useLocation();
     const { color: categoryActiveColor } = useSelector((state: IState) => state.layout.categories);
+
+    useEffect(() => { fetchPosts(locale, dispatch); }, [locale, dispatch]);
 
     const { y: windowScrollY } = useWindowScroll();
 

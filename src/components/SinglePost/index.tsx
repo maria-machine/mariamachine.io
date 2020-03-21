@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
+import { useSelector } from 'react-redux';
 
-import { contentful } from '../../utils/contentful';
-
+import { IState } from '../../interfaces/state.interface';
 import { IPost } from '../../interfaces/post.interface';
 
 import Loader from '../Loader';
@@ -23,37 +23,16 @@ const StyledSinglePost = styled.div`
     width: 100%;
 `;
 
-const fetchPost = async (
-    locale: string,
-    publicUrl: string,
-    needRedirect: boolean,
-    setPost: Dispatch<SetStateAction<IPost>>,
-    setIsLoading: Dispatch<SetStateAction<boolean>>
-) => {
-    if (needRedirect) {
-        return;
-    }
-
-    const { items: posts } = await contentful().getEntries({
-        'content_type': 'post',
-        'fields.publicUrl': publicUrl,
-        locale
-    });
-
-    setPost((posts.length ? posts[0] : {}) as IPost);
-    setIsLoading(false);
-};
-
 const SinglePost: FunctionComponent<RouteComponentProps<ISinglePost>> = ({match}) => {
     const { locale } = useIntl();
     const { publicUrl } = match.params;
 
-    const [post, setPost] = useState({} as IPost);
-    const [isLoading, setIsLoading] = useState(true);
+    const post: IPost = useSelector((state: IState) => state.posts[locale])
+        .find((post) => post.fields.publicUrl === publicUrl) || {} as IPost;
+
+    const isLoading = !post.fields;
 
     const needRedirect = !isLoading && (!post.fields || !post.fields.title);
-
-    useEffect(() => { fetchPost(locale, publicUrl, needRedirect, setPost, setIsLoading); }, [publicUrl, locale, needRedirect]);
 
     if (needRedirect) {
         return (<Redirect to='/' />);

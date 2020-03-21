@@ -13,6 +13,10 @@ const initialStateDefault = {
     },
     layout: {
         categories: {}
+    },
+    posts: {
+        ru: [],
+        en: []
     }
 };
 
