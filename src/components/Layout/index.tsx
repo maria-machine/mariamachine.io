@@ -216,7 +216,7 @@ const Layout: FunctionComponent = ({
 
     useInterval(
         () => setNeedRefresh(true),
-        5 * 60 * 1000
+        6 * 60 * 60 * 1000
     );
 
     useEffect(() => {
