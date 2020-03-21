@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useEffect, Dispatch } from 'react';
+import React, { FunctionComponent, useEffect, Dispatch, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { useIntl } from 'react-intl';
-import { useWindowScroll } from 'react-use';
+import { useWindowScroll, useInterval } from 'react-use';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { contentful } from '../../utils/contentful';
@@ -208,9 +208,23 @@ const Layout: FunctionComponent = ({
     const dispatch = useDispatch();
     const { locale, formatMessage } = useIntl();
     const { pathname } = useLocation();
-    const { color: categoryActiveColor } = useSelector((state: IState) => state.layout.categories);
+    const state = useSelector((state: IState) => state);
+    const [needRefresh, setNeedRefresh] = useState(false);
 
-    useEffect(() => { fetchPosts(locale, dispatch); }, [locale, dispatch]);
+    const { color: categoryActiveColor } = state.layout.categories;
+    const posts = state.posts[locale];
+
+    useInterval(
+        () => setNeedRefresh(true),
+        5 * 60 * 1000
+    );
+
+    useEffect(() => {
+        if (!posts.length || needRefresh) {
+            fetchPosts(locale, dispatch);
+            setNeedRefresh(false);
+        }
+    }, [locale, posts, needRefresh, dispatch]);
 
     const { y: windowScrollY } = useWindowScroll();
 
